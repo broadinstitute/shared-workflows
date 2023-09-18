@@ -1,0 +1,75 @@
+---
+name: Python Checks
+
+'on':
+  workflow_call:
+    inputs:
+      additional_packages:
+        description: String of additional packages that should be installed.
+        default: ''
+        required: false
+        type: string
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      # python_versions:
+      #   default: ['3.7', '3.8', '3.9', '3.10', '3.11']
+      #   description: The versions of Python on which the unit tests should run.
+      #   required: false
+      #   type: string
+      python_package_name:
+        default: ''
+        description: The name of the PyPi package the repo will create.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+
+jobs:
+  unit-tests:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install additional packages
+        if: ${{ inputs.additional_packages != '' }}
+        run: sudo apt-get install -y ${{ inputs.additional_packages }}
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          cache: poetry
+          python-version: ${{ matrix.python-version }}
+      - name: Configure Poetry
+        run: poetry config virtualenvs.in-project true
+      - name: Check pyproject.toml
+        run: poetry check
+      - name: Install dependencies
+        run: poetry install
+      - name: Test with green
+        run: |
+          poetry run green tests
+          poetry run coverage xml
+      - name: Run a test module build and install
+        if: ${{ inputs.python_package_name != '' }}
+        run: |
+          poetry build
+          pip install dist/${{ inputs.python_package_name }}-*.tar.gz
+    timeout-minutes: ${{ inputs.timeout_minutes }}
