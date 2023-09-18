@@ -1,0 +1,57 @@
+---
+name: pypi_test_deploy
+
+'on':
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+    secrets:
+      pypi_test_token:
+        description: The PyPi for test.pypi.org token to use to deploy.
+        required: true
+
+jobs:
+  pypi_test_deploy:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          cache: poetry
+          python-version: '3.11'
+      - name: Configure Poetry
+        run: poetry config virtualenvs.in-project true
+      - name: Install dependencies
+        run: poetry install
+      - name: Setup PyPi credential
+        env:
+          PYPI_TOKEN: ${{ secrets.pypi_test_token }}
+        run: |
+          poetry config repositories.testpypi https://test.pypi.org/legacy/
+          poetry config pypi-token.testpypi "$PYPI_TOKEN"
+      - name: Package build
+        run: poetry build
+      - name: Publish package to PyPi
+        run: poetry publish --dry-run -r testpypi
+    timeout-minutes: ${{ inputs.timeout_minutes }}
