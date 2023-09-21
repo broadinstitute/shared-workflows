@@ -1,0 +1,34 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+
+jobs:
+  conventional-commits:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Validate PR title
+        uses: 'lab42/conventional-commit@v0.2.2'
+        with:
+          description_regexp: '(.*)'
+    timeout-minutes: ${{ inputs.timeout_minutes }}

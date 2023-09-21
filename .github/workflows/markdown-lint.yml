@@ -1,0 +1,57 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      config_file:
+        default: .markdownlint-cli2.yaml
+        description: The configuration file to use.
+        required: false
+        type: string
+      fix:
+        default: false
+        description: If set to true, fix any issues found.
+        required: false
+        type: boolean
+      globs:
+        default: '**/*.md'
+        description: The glob to use to find all markdown files.
+        required: false
+        type: string
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      separator:
+        default: ','
+        description: The character used to separate globs.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+
+jobs:
+  markdown-lint:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v13
+        with:
+          config: ${{ inputs.config_file }}
+          fix: ${{ inputs.fix }}
+          globs: ${{ inputs.globs }}
+          separator: ${{ inputs.separator }}
+    timeout-minutes: ${{ inputs.timeout_minutes }}
