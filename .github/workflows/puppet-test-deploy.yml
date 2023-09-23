@@ -12,6 +12,11 @@
         description: The name of the PyPi package the repo will create.
         required: false
         type: string
+      puppet_version:
+        default: '7'
+        description: The version of Puppet to use in PDK
+        required: false
+        type: string
       timeout_minutes:
         description: The maximum time (in minutes) for a job to run.
         default: 5
@@ -24,7 +29,7 @@
         type: string
 
 jobs:
-  linting:
+  test-deploy:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
@@ -43,7 +48,7 @@ jobs:
           ruby-version: '3.2'
           rubygems: 'latest'
       - name: 'Module build'
-        run: 'bundle exec pdk build --puppet-version=${{ inputs.puppet_version }} --force'
+        run: 'bundle exec pdk build --force'
       - name: 'Test module install'
         run: 'bundle exec puppet module install pkg/${{ inputs.puppet_package_name }}-*.tar.gz'
     timeout-minutes: ${{ inputs.timeout_minutes }}
