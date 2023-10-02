@@ -4,6 +4,11 @@ name: pypi_test_deploy
 'on':
   workflow_call:
     inputs:
+      additional_packages:
+        default: ''
+        description: String of additional packages that should be installed.
+        required: false
+        type: string
       jobs_run_on:
         default: ubuntu-latest
         description: The runner group on which jobs will run.
@@ -31,6 +36,9 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
+      - name: Install additional packages
+        if: ${{ inputs.additional_packages != '' }}
+        run: sudo apt-get install -y ${{ inputs.additional_packages }}
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Install poetry
