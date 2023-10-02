@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: 'Setup TFLint'
-        uses: terraform-linters/setup-tflint@v3
+        uses: terraform-linters/setup-tflint@v4
       - name: 'Run pre-commit'
         uses: 'pre-commit/action@v3.0.0'
       - name: 'Run TFLint'
