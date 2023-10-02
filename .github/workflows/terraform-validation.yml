@@ -1,0 +1,94 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      terraform_version:
+        default: '1.5.5'
+        description: The version of Terraform to use when validating.
+        required: false
+        type: string
+      terragrunt_directory:
+        default: 'prod'
+        description: The environment directory from which Terragrunt should run.
+        required: false
+        type: string
+      terragrunt_version:
+        default: '0.48.7'
+        description: The version of Terragrunt to use when validating.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      use_terragrunt:
+        default: false
+        description: If set to true, use Terragrunt instead of Terraform.
+        required: false
+        type: boolean
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+
+jobs:
+  terraform-validation:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    env:
+      DISABLE_INIT: true
+    if: ${{ inputs.use_terragrunt == false }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ inputs.terraform_version }}
+      - name: Initialize Terraform
+        run: terraform init
+      - name: Validate Terraform
+        run: terraform validate
+    timeout-minutes: ${{ inputs.timeout_minutes }}
+  terragrunt-validation:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    env:
+      DISABLE_INIT: true
+    if: ${{ inputs.use_terragrunt == true }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Check terragrunt HCL
+        uses: gruntwork-io/terragrunt-action@v1
+        with:
+          tf_version: ${{ inputs.terraform_version }}
+          tg_version: ${{ inputs.terragrunt_version }}
+          tg_dir: ${{ inputs.working_directory }}
+          tg_command: hclfmt --terragrunt-check --terragrunt-diff
+      - name: Initialize Terraform
+        uses: gruntwork-io/terragrunt-action@v1
+        with:
+          tf_version: ${{ inputs.terraform_version }}
+          tg_version: ${{ inputs.terragrunt_version }}
+          tg_dir: "${{ inputs.working_directory }}/${{ inputs.terragrunt_directory }}"
+          tg_command: init
+      - name: Validate Terraform
+        uses: gruntwork-io/terragrunt-action@v1
+        with:
+          tf_version: ${{ inputs.terraform_version }}
+          tg_version: ${{ inputs.terragrunt_version }}
+          tg_dir: "${{ inputs.working_directory }}/${{ inputs.terragrunt_directory }}"
+          tg_command: validate
+    timeout-minutes: ${{ inputs.timeout_minutes }}
