@@ -1,0 +1,72 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      run_checkov:
+        default: false
+        description: If set to true, run checkov tests
+        required: false
+        type: boolean
+      run_tfsec:
+        default: true
+        description: If set to true, run tfsec tests
+        required: false
+        type: boolean
+      run_trivy:
+        default: false
+        description: If set to true, run Trivy tests
+        required: false
+        type: boolean
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+    secrets:
+      wf_github_token:
+        description: The GitHub token to use.
+        required: true
+jobs:
+  static_analysis:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: 'Checkout repo'
+        uses: 'actions/checkout@v4'
+      - name: Install additional packages
+        if: ${{ inputs.additional_packages != '' }}
+        run: sudo apt-get install -y ${{ inputs.additional_packages }}
+      - name: 'Run Checkov'
+        id: 'checkov'
+        if: ${{ inputs.run_checkov == true }}
+        uses: 'bridgecrewio/checkov-action@v12'
+      - name: 'Run tfsec'
+        id: 'tfsec'
+        if: ${{ inputs.run_tfsec == true }}
+        uses: 'aquasecurity/tfsec-pr-commenter-action@v1.3.1'
+        with:
+          github_token: ${{ secrets.wf_github_token }}
+      - name: Run Trivy vulnerability scanner in IaC mode
+        if: ${{ inputs.run_trivy == true }}
+        uses: aquasecurity/trivy-action@0.12.0
+        with:
+          scan-type: 'config'
+          hide-progress: false
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+    timeout-minutes: ${{ inputs.timeout_minutes }}
