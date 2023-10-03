@@ -21,9 +21,5 @@ jobs:
     steps:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
-      # - name: 'Set up Python'
-      #   uses: 'actions/setup-python@v4'
-      #   with:
-      #     python-version: '3.11'
       - name: 'Run pre-commit'
         uses: 'pre-commit/action@v3.0.0'
