@@ -7,15 +7,10 @@ name: 'checks'
       - 'main'
 
 jobs:
-  conventional:
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: Validate PR title
-        uses: 'lab42/conventional-commit@v0.2.2'
-        with:
-          description_regexp: '(.*)'
-  markdown-lint:
-    uses: ./.github/workflows/markdown-lint.yml
+  markdownlint:
+    uses: ./.github/workflows/markdownlint.yaml
+  conventional-commit:
+    uses: ./.github/workflows/conventional-commit.yaml
   pre-commit:
     runs-on: 'ubuntu-latest'
     steps:
