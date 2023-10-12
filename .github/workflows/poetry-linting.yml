@@ -14,11 +14,26 @@ name: python-linting
         description: The runner group on which jobs will run.
         required: false
         type: string
+      ruff_version:
+        default: '0.1.0'
+        description: The version of ruff to run.
+        required: false
+        type: string
       timeout_minutes:
         description: The maximum time (in minutes) for a job to run.
         default: 5
         required: false
         type: number
+      use_pylama:
+        description: If true, use pylama to lint the repository.
+        default: true
+        required: false
+        type: boolean
+      use_ruff:
+        description: If true, use ruff to lint the repository.
+        default: false
+        required: false
+        type: boolean
       working_directory:
         description: The working directory where all jobs should be executed.
         default: '.'
@@ -51,5 +66,11 @@ jobs:
       - name: Lint with yamllint
         run: poetry run yamllint . -s
       - name: Lint with pylama
+        if: ${{ inputs.use_pylama }}
         run: "poetry run pylama -v --skip '.venv/*'"
+      - name: Lint with ruff
+        if: ${{ inputs.use_ruff }}
+        uses: chartboost/ruff-action@v1
+        with:
+          version: ${{ inputs.ruff_version }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
