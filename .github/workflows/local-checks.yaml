@@ -14,6 +14,8 @@ jobs:
         uses: 'lab42/conventional-commit@v0.2.2'
         with:
           description_regexp: '(.*)'
+  markdown-lint:
+    uses: ./.github/workflows/markdown-lint.yml
   pre-commit:
     runs-on: 'ubuntu-latest'
     steps:
