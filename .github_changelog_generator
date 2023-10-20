@@ -1,0 +1,5 @@
+exclude-labels=dependencies,duplicate,question,invalid,wontfix,maintenance
+pr-wo-labels=false
+project=shared-workflows
+unreleased=false
+user=broadinstitute

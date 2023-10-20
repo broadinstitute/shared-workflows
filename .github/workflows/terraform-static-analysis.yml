@@ -45,9 +45,6 @@ jobs:
     steps:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
-      - name: Install additional packages
-        if: ${{ inputs.additional_packages != '' }}
-        run: sudo apt-get install -y ${{ inputs.additional_packages }}
       - name: 'Run Checkov'
         id: 'checkov'
         if: ${{ inputs.run_checkov == true }}
