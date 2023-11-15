@@ -1,0 +1,54 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      puppet_version:
+        default: '7'
+        description: The version of Puppet to use in PDK
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+    secrets:
+      forge_token:
+        description: The Puppet Forge token to use to deploy.
+        required: true
+jobs:
+  forge-deploy:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: 'Checkout repo'
+        uses: 'actions/checkout@v4'
+      - name: 'Set up Ruby'
+        uses: 'ruby/setup-ruby@v1.159.0'
+        env:
+          BUNDLE_SILENCE_ROOT_WARNING: '1'
+          BUNDLE_WITH: 'development'
+          PUPPET_GEM_VERSION: "~> ${{ inputs.puppet_version }}"
+        with:
+          bundler-cache: true
+          ruby-version: '3.2'
+          rubygems: 'latest'
+      - name: 'Module build'
+        run: 'bundle exec pdk build --force'
+      - name: 'Publish package to Puppet Forge'
+        env:
+          PDK_FORGE_TOKEN: ${{ secrets.forge_token }}
+        run: 'bundle exec pdk release publish'
+    timeout-minutes: ${{ inputs.timeout_minutes }}
