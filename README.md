@@ -150,7 +150,7 @@ docker run -it --rm \
     -e CHANGELOG_GITHUB_TOKEN='yourtokenhere' \
     -v "$(pwd)":/working \
     -w /working \
-    githubchangeloggenerator/github-changelog-generator:latest --verbose --future-release 2.0.0 --unreleased
+    githubchangeloggenerator/github-changelog-generator:latest --verbose --future-release 2.0.0
 ```
 
 As a note, this repository uses the default labels for formatting the `CHANGELOG.md`.  Label information can be found here: [Advanced-change-log-generation-examples](https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#section-options)
