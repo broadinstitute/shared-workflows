@@ -12,9 +12,4 @@ jobs:
   conventional-commit:
     uses: ./.github/workflows/conventional-commit.yaml
   pre-commit:
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v4'
-      - name: 'Run pre-commit'
-        uses: 'pre-commit/action@v3.0.0'
+    uses: ./.github/workflows/pre-commit.yaml

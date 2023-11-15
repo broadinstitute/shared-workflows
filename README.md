@@ -39,6 +39,12 @@ action to lint markdown files.
 * `globs`: The glob to use to find all markdown files. Default: `**/*.md`
 * `separator`: The character used to separate globs. Default: `,`
 
+### pre-commit.yaml
+
+This workflow runs the
+[pre-commmit action](https://github.com/pre-commit/action) with minimal options
+for configuration.
+
 ### puppet-build.yaml
 
 This workflow will setup [Puppet][7] using
