@@ -7,23 +7,9 @@ name: 'checks'
       - 'main'
 
 jobs:
-  conventional:
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: Validate PR title
-        uses: 'lab42/conventional-commit@v0.2.2'
-        with:
-          description_regexp: '(.*)'
-  markdown-lint:
-    uses: ./.github/workflows/markdown-lint.yml
+  markdownlint:
+    uses: ./.github/workflows/markdownlint.yaml
+  conventional-commit:
+    uses: ./.github/workflows/conventional-commit.yaml
   pre-commit:
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v4'
-      # - name: 'Set up Python'
-      #   uses: 'actions/setup-python@v4'
-      #   with:
-      #     python-version: '3.11'
-      - name: 'Run pre-commit'
-        uses: 'pre-commit/action@v3.0.0'
+    uses: ./.github/workflows/pre-commit.yaml
