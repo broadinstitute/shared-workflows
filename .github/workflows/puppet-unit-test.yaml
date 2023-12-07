@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
-      - name: 'Set up Ruby'
+      - name: "Set up Ruby ${{ matrix.ruby }}"
         uses: 'ruby/setup-ruby@v1.162.0'
         env:
           BUNDLE_SILENCE_ROOT_WARNING: '1'
@@ -43,7 +43,7 @@ jobs:
           PUPPET_GEM_VERSION: "~> ${{ matrix.puppet }}"
         with:
           bundler-cache: true
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: "${{ matrix.ruby }}"
           rubygems: 'latest'
       - name: 'Run unit tests'
         run: 'bundle exec pdk test unit --puppet-version=${{ matrix.puppet }} -v'

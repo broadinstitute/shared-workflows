@@ -12,6 +12,11 @@
         description: The version of Puppet to use in PDK
         required: false
         type: string
+      ruby_version:
+        description: The version of Ruby to use for the run.
+        default: '3.2'
+        required: false
+        type: string
       timeout_minutes:
         description: The maximum time (in minutes) for a job to run.
         default: 5
@@ -32,7 +37,7 @@ jobs:
     steps:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
-      - name: 'Set up Ruby'
+      - name: "Set up Ruby ${{ inputs.ruby_version }}"
         uses: 'ruby/setup-ruby@v1.162.0'
         env:
           BUNDLE_SILENCE_ROOT_WARNING: '1'
@@ -40,7 +45,7 @@ jobs:
           PUPPET_GEM_VERSION: "~> ${{ inputs.puppet_version }}"
         with:
           bundler-cache: true
-          ruby-version: '3.2'
+          ruby-version: "${{ inputs.ruby_version }}"
           rubygems: 'latest'
       - name: 'Run static analysis'
         run: bundle exec pdk validate --puppet-version=${{ inputs.puppet_version }}
