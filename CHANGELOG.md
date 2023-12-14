@@ -1,8 +1,19 @@
 # Changelog
 
-## [1.4.2](https://github.com/broadinstitute/shared-workflows/tree/1.4.2) (2023-11-15)
+## [2.0.0](https://github.com/broadinstitute/shared-workflows/tree/2.0.0) (2023-12-14)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v1.4.1...1.4.2)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v1.4.2...2.0.0)
+
+**Implemented enhancements:**
+
+- build\(deps\): bump the actions group with 3 updates [\#28](https://github.com/broadinstitute/shared-workflows/pull/28) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: allow setting language versions in all workflows [\#27](https://github.com/broadinstitute/shared-workflows/pull/27) ([coreone](https://github.com/coreone))
+- build\(deps\): bump the actions group with 1 update [\#26](https://github.com/broadinstitute/shared-workflows/pull/26) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat!: \[BITSDN-3201\] dogfood shared-workflows [\#24](https://github.com/broadinstitute/shared-workflows/pull/24) ([lbenezriravin](https://github.com/lbenezriravin))
+
+## [v1.4.2](https://github.com/broadinstitute/shared-workflows/tree/v1.4.2) (2023-11-15)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v1.4.1...v1.4.2)
 
 **Implemented enhancements:**
 
