@@ -33,9 +33,7 @@ jobs:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
       - name: 'Setup TFLint'
-        uses: terraform-linters/setup-tflint@v4
-      - name: 'Run pre-commit'
-        uses: 'pre-commit/action@v3.0.0'
+        uses: 'terraform-linters/setup-tflint@v4'
       - name: 'Run TFLint'
         run: tflint -c ${{ inputs.tflint_config_path }}
     timeout-minutes: ${{ inputs.timeout_minutes }}

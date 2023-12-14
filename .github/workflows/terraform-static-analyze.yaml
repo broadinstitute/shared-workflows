@@ -27,6 +27,11 @@
         default: 5
         required: false
         type: number
+      trivy_skip_files:
+        description: A comma-separated list of files Trivy should ignore (optional).
+        default: ''
+        required: false
+        type: string
       working_directory:
         description: The working directory where all jobs should be executed.
         default: '.'
@@ -57,13 +62,10 @@ jobs:
           github_token: ${{ secrets.wf_github_token }}
       - name: Run Trivy vulnerability scanner in IaC mode
         if: ${{ inputs.run_trivy == true }}
-        uses: aquasecurity/trivy-action@0.16.0
+        uses: 'aquasecurity/trivy-action@0.16.0'
         with:
-          scan-type: 'config'
-          hide-progress: false
-          format: 'sarif'
-          output: 'trivy-results.sarif'
           exit-code: '1'
-          ignore-unfixed: true
+          scan-type: 'config'
           severity: 'CRITICAL,HIGH'
+          skip-files: ${{ inputs.trivy_skip_files }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
