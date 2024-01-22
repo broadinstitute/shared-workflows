@@ -53,9 +53,7 @@ jobs:
         with:
           terraform_version: ${{ inputs.terraform_version }}
       - name: Initialize Terraform
-        run: |
-          rm -f .terraform.lock.hcl
-          terraform init -reconfigure -backend=false -upgrade
+        run: terraform init -reconfigure -backend=false
       - name: Validate Terraform
         run: terraform validate
     timeout-minutes: ${{ inputs.timeout_minutes }}
