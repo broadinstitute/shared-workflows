@@ -43,8 +43,6 @@ jobs:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
-    env:
-      DISABLE_INIT: true
     if: ${{ inputs.use_terragrunt == false }}
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
@@ -55,7 +53,9 @@ jobs:
         with:
           terraform_version: ${{ inputs.terraform_version }}
       - name: Initialize Terraform
-        run: terraform init
+        run: |
+          rm -f .terraform.lock.hcl
+          terraform init -reconfigure -backend=false -upgrade
       - name: Validate Terraform
         run: terraform validate
     timeout-minutes: ${{ inputs.timeout_minutes }}
