@@ -1,8 +1,22 @@
 # Changelog
 
-## [2.0.0](https://github.com/broadinstitute/shared-workflows/tree/2.0.0) (2023-12-14)
+## [2.0.1](https://github.com/broadinstitute/shared-workflows/tree/2.0.1) (2024-01-22)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v1.4.2...2.0.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.0.0...2.0.1)
+
+**Implemented enhancements:**
+
+- build\(deps\): bump the actions group with 2 updates [\#34](https://github.com/broadinstitute/shared-workflows/pull/34) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the actions group with 1 update [\#32](https://github.com/broadinstitute/shared-workflows/pull/32) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the actions group with 1 update [\#31](https://github.com/broadinstitute/shared-workflows/pull/31) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+**Fixed bugs:**
+
+- fix: terraform init will not run with a remote backend [\#33](https://github.com/broadinstitute/shared-workflows/pull/33) ([coreone](https://github.com/coreone))
+
+## [v2.0.0](https://github.com/broadinstitute/shared-workflows/tree/v2.0.0) (2023-12-15)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v1.4.2...v2.0.0)
 
 **Implemented enhancements:**
 
