@@ -232,7 +232,7 @@ docker run -it --rm \
     -w /working \
     githubchangeloggenerator/github-changelog-generator:latest \
         --verbose \
-        --future-release 2.0.0 \
+        --future-release 2.0.0
 ```
 
 As a note, this repository uses the default labels for formatting the
