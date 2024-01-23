@@ -14,6 +14,14 @@ parameters that can be passed with `with:` from calling repositories:
 * `working_directory`: The working directory where all jobs should be executed.
   Default: `.`
 
+### adr-check-toc.yaml
+
+This workflow will run the `adr generate toc` command using
+[adr](https://github.com/npryce/adr-tools) to generate the Table of Contents for the
+ADRs in the repository. The workflow assumes the output goes to the `README.md` in the
+same directory as the ADRs. This check makes sure PRs haven't forgotten to run this
+command as part of their commits.
+
 ### conventional-commit.yaml
 
 This workflow will run the
