@@ -64,11 +64,28 @@ as expected.
 
 #### puppet-build Inputs
 
-* `puppet_version`: The version of [Puppet][7] to use in [PDK][9]. Default: `7`
 * `puppet_package_name`: The name of the [Puppet][7] module the repo will
   create. Default: ``
+* `puppet_version`: The version of [Puppet][7] to use in [PDK][9]. Default: `7`
+* `ruby_version`: The version of [Ruby][8] to use. Default: `3.2`
 
-### puppet-linting.yaml
+### puppet-forge-deploy.yaml
+
+This workflow will setup [Puppet][7] using
+[ruby/setup-ruby](https://github.com/ruby/setup-ruby). The linting and dependency
+installations will all happen using [PDK][9]. The [Puppet][7] module will be built with
+[PDK][9] and then pushed to the [Puppet Forge][12].
+
+#### puppet-forge-deploy Inputs
+
+* `puppet_version`: The version of [Puppet][7] to use in [PDK][9]. Default: `7`
+* `ruby_version`: The version of [Ruby][8] to use. Default: `3.2`
+
+#### puppet-forge-deploy Secrets
+
+* `forge_token`: The [Puppet Forge][12] token to use when deploying the module.
+
+### puppet-lint.yaml
 
 This workflow will setup [Puppet][7] using
 [ruby/setup-ruby](https://github.com/ruby/setup-ruby) ([Ruby][8] version
@@ -78,8 +95,9 @@ This workflow will setup [Puppet][7] using
 #### puppet-linting Inputs
 
 * `puppet_version`: The version of [Puppet][7] to use in [PDK][9]. Default: `7`
+* `ruby_version`: The version of [Ruby][8] to use. Default: `3.2`
 
-### puppet-unit-tests.yaml
+### puppet-unit-test.yaml
 
 This workflow will setup [Puppet][7] using
 [ruby/setup-ruby](https://github.com/ruby/setup-ruby). The testing will happen
@@ -96,6 +114,7 @@ This workflow will setup [Python][5] (`3.1.1`) and do a build and deploy of the
 
 * `additional_packages`: String of additional packages that should be
   installed. Default: ``
+* `python_version`: The version of [Python][5] to use. Default: `3.11`
 
 #### python-deploy-to-pypi Secrets
 
@@ -116,6 +135,7 @@ by setting the `use_ruff` input to `true`.
 
 * `additional_packages`: String of additional packages that should be
   installed. Default: ``
+* `python_version`: The version of [Python][5] to use. Default: `3.11`
 * `ruff_version`: The version of [Ruff](https://github.com/astral-sh/ruff) to
   run. Default: `0.1.0`
 * `use_pylama`: If true, use
@@ -133,6 +153,7 @@ This workflow will setup [Python][5] (`3.1.1`) and do a build and deploy of the
 
 * `additional_packages`: String of additional packages that should be
   installed. Default: ``
+* `python_version`: The version of [Python][5] to use. Default: `3.11`
 
 #### python-test-deploy-to-pypi Secrets
 
@@ -182,6 +203,7 @@ Action).
 * `run_checkov`: If set to true, run checkov tests. Default: `false`
 * `run_tfsec`: If set to true, run tfsec tests. Default: `true`
 * `run_trivy`: If set to true, run Trivy tests. Default: `false`
+* `trivy_skip_files`: A comma-separated list of files Trivy should ignore. Default: ``
 
 #### terraform-static-analyze Secrets
 
@@ -258,3 +280,4 @@ As a note, this repository uses the default labels for formatting the
 [9]: https://www.puppet.com/docs/pdk/3.x/pdk.html "PDK"
 [10]: https://www.terraform.io/ "Terraform"
 [11]: https://terragrunt.gruntwork.io/ "Terragrunt"
+[12]: https://forge.puppet.com/ "Puppet Forge"
