@@ -277,22 +277,13 @@ docker run -it --rm \
     -e CHANGELOG_GITHUB_TOKEN='yourtokenhere' \
     -v "$(pwd)":/working \
     -w /working \
-    githubchangeloggenerator/github-changelog-generator:latest --verbose
-```
-
-To generate the log for an upcoming release that has not yet been tagged, you
-can run a command to include the upcoming release version. For example,
-`2.0.0`:
-
-```sh
-docker run -it --rm \
-    -e CHANGELOG_GITHUB_TOKEN='yourtokenhere' \
-    -v "$(pwd)":/working \
-    -w /working \
     githubchangeloggenerator/github-changelog-generator:latest \
         --verbose \
         --future-release 2.0.0
 ```
+
+This will generate the log for an upcoming release of `2.0.0` that has not yet been
+tagged.
 
 As a note, this repository uses the default labels for formatting the
 `CHANGELOG.md`. Label information can be found here:

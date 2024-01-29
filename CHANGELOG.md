@@ -1,8 +1,20 @@
 # Changelog
 
-## [2.0.1](https://github.com/broadinstitute/shared-workflows/tree/2.0.1) (2024-01-22)
+## [2.1.0](https://github.com/broadinstitute/shared-workflows/tree/2.1.0) (2024-01-30)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.0.0...2.0.1)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.0.1...2.1.0)
+
+**Implemented enhancements:**
+
+- fix: remove hard-coded directory for python-unit-test Action [\#41](https://github.com/broadinstitute/shared-workflows/pull/41) ([coreone](https://github.com/coreone))
+- build\(deps\): bump the actions group with 1 update [\#40](https://github.com/broadinstitute/shared-workflows/pull/40) ([dependabot[bot]](https://github.com/apps/dependabot))
+- fix: update missing documentation [\#38](https://github.com/broadinstitute/shared-workflows/pull/38) ([coreone](https://github.com/coreone))
+- feat: add Ansible linter [\#37](https://github.com/broadinstitute/shared-workflows/pull/37) ([coreone](https://github.com/coreone))
+- feat: add ADR TOC check [\#36](https://github.com/broadinstitute/shared-workflows/pull/36) ([coreone](https://github.com/coreone))
+
+## [v2.0.1](https://github.com/broadinstitute/shared-workflows/tree/v2.0.1) (2024-01-22)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.0.0...v2.0.1)
 
 **Implemented enhancements:**
 
