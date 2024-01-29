@@ -22,6 +22,20 @@ ADRs in the repository. The workflow assumes the output goes to the `README.md` 
 same directory as the ADRs. This check makes sure PRs haven't forgotten to run this
 command as part of their commits.
 
+### ansible-lint.yaml
+
+This workflow will setup [Python][5] (`3.11`) and lint the repository using both
+[yamllint][13] and [ansible-lint](https://github.com/ansible/ansible-lint). [Poetry][3]
+is used to install the [Python][5] dependencies. Both [yamllint][13] and
+[ansible-lint](https://github.com/ansible/ansible-lint) are expected to be installed by
+the [Poetry][3] configuration in the repository using this workflow.
+
+#### ansible-lint Inputs
+
+* `additional_packages`: String of additional packages that should be
+  installed. Default: ``
+* `python_version`: The version of [Python][5] to use. Default: `3.11`
+
 ### conventional-commit.yaml
 
 This workflow will run the
@@ -107,7 +121,7 @@ and `8`. The dependency installation and unit tests will all happen using
 
 ### python-deploy-to-pypi.yaml
 
-This workflow will setup [Python][5] (`3.1.1`) and do a build and deploy of the
+This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
 [Python][5] package to [PyPi][2] using [Poetry][3].
 
 #### python-deploy-to-pypi Inputs
@@ -123,9 +137,9 @@ This workflow will setup [Python][5] (`3.1.1`) and do a build and deploy of the
 
 ### python-lint.yaml
 
-This workflow will setup [Python][5] (`3.1.1`) and lint the repository.
+This workflow will setup [Python][5] (`3.11`) and lint the repository.
 [Poetry][3] is used to install any [Python][5] dependencies. By default the
-linters run are [yamllint](https://github.com/adrienverge/yamllint), and
+linters run are [yamllint][13], and
 [pylama](https://github.com/AtomLinter/linter-pylama). As of August 2023,
 [pylama](https://github.com/AtomLinter/linter-pylama) has been deprecated, so
 you can run [Ruff](https://github.com/astral-sh/ruff) as the [Python][5] linter
@@ -146,7 +160,7 @@ by setting the `use_ruff` input to `true`.
 
 ### python-test-deploy-to-pypi.yaml
 
-This workflow will setup [Python][5] (`3.1.1`) and do a build and deploy of the
+This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
 [Python][5] package to [Test PyPi][6] using [Poetry][3].
 
 #### python-test-deploy-to-pypi Inputs
@@ -281,3 +295,4 @@ As a note, this repository uses the default labels for formatting the
 [10]: https://www.terraform.io/ "Terraform"
 [11]: https://terragrunt.gruntwork.io/ "Terragrunt"
 [12]: https://forge.puppet.com/ "Puppet Forge"
+[13]: https://github.com/adrienverge/yamllint "yamllint"
