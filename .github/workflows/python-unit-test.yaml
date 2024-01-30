@@ -14,14 +14,19 @@ name: Python Checks
         description: The runner group on which jobs will run.
         required: false
         type: string
-      # python_versions:
-      #   default: ['3.7', '3.8', '3.9', '3.10', '3.11']
-      #   description: The versions of Python on which the unit tests should run.
-      #   required: false
-      #   type: string
+      python_versions:
+        default: '{ "versions": [ "3.7", "3.8", "3.9", "3.10", "3.11" ] }'
+        description: The versions of Python on which the unit tests should run.
+        required: false
+        type: string
       python_package_name:
         default: ''
         description: The name of the PyPi package the repo will create.
+        required: false
+        type: string
+      test_targets:
+        default: ''
+        description: The directories to target for testing.
         required: false
         type: string
       timeout_minutes:
@@ -43,7 +48,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        python-version: ${{ fromJSON(inputs.python_versions).versions }}
     steps:
       - name: Install additional packages
         if: ${{ inputs.additional_packages != '' }}
@@ -65,7 +70,7 @@ jobs:
         run: poetry install
       - name: Test with green
         run: |
-          poetry run green tests
+          poetry run green ${{ inputs.test_targets }}
           poetry run coverage xml
       - name: Run a test module build and install
         if: ${{ inputs.python_package_name != '' }}

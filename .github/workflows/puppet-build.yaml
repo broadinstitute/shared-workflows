@@ -34,7 +34,7 @@
         type: string
 
 jobs:
-  test-deploy:
+  test-build:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
