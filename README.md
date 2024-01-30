@@ -115,9 +115,19 @@ This workflow will setup [Puppet][7] using
 
 This workflow will setup [Puppet][7] using
 [ruby/setup-ruby](https://github.com/ruby/setup-ruby). The testing will happen
-on a matrix of [Ruby][8] versions `3.1` and `3.2` and [Puppet][7] versions `7`
-and `8`. The dependency installation and unit tests will all happen using
-[PDK][9].
+on a matrix of [Ruby][8] and [Puppet][7] versions. The dependency installation and unit
+tests will all happen using [PDK][9].
+
+#### puppet-unit-test Inputs
+
+* `puppet_versions`: The versions of [Puppet][7] to use in the unit tests, passed as a
+  string in JSON format with `versions` as the key. Default:
+  `'{ "versions": [ "7", "8" ] }'`
+  * **Note: Make sure to enclose the JSON string in single quotes!!**
+* `ruby_versions`: The versions of [Ruby][8] to use in the unit tests, passed as a
+  string in JSON format with `versions` as the key. Default:
+  `'{ "versions": [ "3.1", "3.2" ] }'`
+  * **Note: Make sure to enclose the JSON string in single quotes!!**
 
 ### python-deploy-to-pypi.yaml
 
@@ -176,10 +186,9 @@ This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
 
 ### python-unit-test.yaml
 
-This workflow will setup a matrix of [Python][5] versions (currently `['3.7',
-'3.8', '3.9', '3.10', '3.11']`) and run the unit tests for the repository using
-[green](https://github.com/CleanCut/green). [Poetry][3] is used to install any
-[Python][5] dependencies.
+This workflow will setup a matrix of [Python][5] versions and run the unit tests for the
+repository using [green](https://github.com/CleanCut/green). [Poetry][3] is used to
+install any [Python][5] dependencies.
 
 #### python-unit-test Inputs
 
@@ -187,6 +196,12 @@ This workflow will setup a matrix of [Python][5] versions (currently `['3.7',
   installed. Default: ``
 * `python_package_name`: The name of the [PyPi][2] package the repo will
   create. Default: ``
+* `python_versions`: The versions of [Python][5] to use in the unit tests, passed as a
+  string in JSON format with `versions` as the key. Default:
+  `'{ "versions": [ "3.7", "3.8", "3.9", "3.10", "3.11" ] }'`
+  * **Note: Make sure to enclose the JSON string in single quotes!!**
+* `test_targets`: A list of directories to target for testing.
+[green](https://github.com/CleanCut/green) will autodetect if left blank. Default: ``
 
 ### terraform-lint.yaml
 

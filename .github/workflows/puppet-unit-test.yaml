@@ -7,6 +7,16 @@
         description: The runner group on which jobs will run.
         required: false
         type: string
+      puppet_versions:
+        default: '{ "versions": [ "7", "8" ] }'
+        description: The versions of Puppet on which the unit tests should run.
+        required: false
+        type: string
+      ruby_versions:
+        default: '{ "versions": [ "3.1", "3.2" ] }'
+        description: The versions of Ruby on which the unit tests should run.
+        required: false
+        type: string
       timeout_minutes:
         description: The maximum time (in minutes) for a job to run.
         default: 5
@@ -26,12 +36,8 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     strategy:
       matrix:
-        puppet:
-          - '7'
-          - '8'
-        ruby:
-          - '3.1'
-          - '3.2'
+        puppet: ${{ fromJSON(inputs.puppet_versions).versions }}
+        ruby: ${{ fromJSON(inputs.ruby_versions).versions }}
     steps:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
