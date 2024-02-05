@@ -14,19 +14,24 @@ name: pypi_deploy
         description: The runner group on which jobs will run.
         required: false
         type: string
+      poetry_install_options:
+        default: '--no-root'
+        description: Extra options to pass to Poetry when doing an install.
+        required: false
+        type: string
       python_version:
-        description: The version of Python to use for the run.
         default: '3.11'
+        description: The version of Python to use for the run.
         required: false
         type: string
       timeout_minutes:
-        description: The maximum time (in minutes) for a job to run.
         default: 5
+        description: The maximum time (in minutes) for a job to run.
         required: false
         type: number
       working_directory:
-        description: The working directory where all jobs should be executed.
         default: '.'
+        description: The working directory where all jobs should be executed.
         required: false
         type: string
     secrets:
@@ -56,7 +61,7 @@ jobs:
       - name: Configure Poetry
         run: poetry config virtualenvs.in-project true
       - name: Install dependencies
-        run: poetry install
+        run: poetry install ${{ inputs.poetry_install_options }}
       - name: Setup PyPi credential
         env:
           PYPI_TOKEN: ${{ secrets.pypi_token }}

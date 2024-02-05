@@ -14,6 +14,11 @@ name: Python Checks
         description: The runner group on which jobs will run.
         required: false
         type: string
+      poetry_install_options:
+        default: '--no-root'
+        description: Extra options to pass to Poetry when doing an install.
+        required: false
+        type: string
       python_versions:
         default: '{ "versions": [ "3.7", "3.8", "3.9", "3.10", "3.11" ] }'
         description: The versions of Python on which the unit tests should run.
@@ -67,7 +72,7 @@ jobs:
       - name: Check pyproject.toml
         run: poetry check
       - name: Install dependencies
-        run: poetry install
+        run: poetry install ${{ inputs.poetry_install_options }}
       - name: Test with green
         run: |
           poetry run green ${{ inputs.test_targets }}

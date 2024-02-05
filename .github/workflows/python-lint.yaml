@@ -14,9 +14,14 @@ name: python-linting
         description: The runner group on which jobs will run.
         required: false
         type: string
+      poetry_install_options:
+        default: '--no-root'
+        description: Extra options to pass to Poetry when doing an install.
+        required: false
+        type: string
       python_version:
-        description: The version of Python to use for the run.
         default: '3.11'
+        description: The version of Python to use for the run.
         required: false
         type: string
       ruff_version:
@@ -25,23 +30,23 @@ name: python-linting
         required: false
         type: string
       timeout_minutes:
-        description: The maximum time (in minutes) for a job to run.
         default: 5
+        description: The maximum time (in minutes) for a job to run.
         required: false
         type: number
       use_pylama:
-        description: If true, use pylama to lint the repository.
         default: true
+        description: If true, use pylama to lint the repository.
         required: false
         type: boolean
       use_ruff:
-        description: If true, use ruff to lint the repository.
         default: false
+        description: If true, use ruff to lint the repository.
         required: false
         type: boolean
       working_directory:
-        description: The working directory where all jobs should be executed.
         default: '.'
+        description: The working directory where all jobs should be executed.
         required: false
         type: string
 
@@ -67,7 +72,7 @@ jobs:
       - name: Configure Poetry
         run: poetry config virtualenvs.in-project true
       - name: Install dependencies
-        run: poetry install
+        run: poetry install ${{ inputs.poetry_install_options }}
       - name: Lint with yamllint
         run: poetry run yamllint . -s
       - name: Lint with pylama
