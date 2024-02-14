@@ -14,7 +14,7 @@ metadata:
     # backstage.io/techdocs-ref: dir:.
 
 spec:
-  type: Library
+  type: library
   # system: tbd
   # domain: tbd
   lifecycle: production
