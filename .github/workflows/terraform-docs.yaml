@@ -55,7 +55,7 @@ jobs:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
-    if: ${{ inputs.use_terragrunt == false && github.actor != 'dependabot[bot]' }}
+    if: !inputs.use_terragrunt && github.actor != 'dependabot[bot]'
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Checkout repo
@@ -76,7 +76,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     env:
       DISABLE_INIT: true
-    if: ${{ inputs.use_terragrunt == false && github.actor != 'dependabot[bot]' }}
+    if: inputs.use_terragrunt && github.actor != 'dependabot[bot]'
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Checkout repo
