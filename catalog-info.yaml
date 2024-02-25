@@ -1,0 +1,27 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: shared-workflows
+  title: shared-workflows
+  description: GitHub Action workflows that can be shared by multiple repositories
+  links:
+    - url: https://shared-workflows.broadinstitute.org
+      title: shared-workflows
+      icon: dashboard
+  tags:
+    - bits
+    - bits-tools
+  annotations:
+    backstage.io/kubernetes-id: shared-workflows
+    github.com/project-slug: broadinstitute/shared-workflows
+    google.com/cloudbuild-project-slug: bits-gke-clusters
+    google.com/cloudbuild-repo-name: shared-workflows
+    google.com/cloudbuild-location: us-east4
+    backstage.io/techdocs-ref: dir:.
+    
+    
+spec:
+  type: resource
+  owner: devnull
+  lifecycle: productionsystem: GitHub domain: orchestration 
