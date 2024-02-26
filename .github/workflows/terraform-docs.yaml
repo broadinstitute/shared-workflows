@@ -2,9 +2,29 @@
 'on':
   workflow_call:
     inputs:
+      config_file:
+        description: The path to the configuration file.
+        default: '.terraform-docs.yml'
+        required: false
+        type: string
+      git_push:
+        description: If set to true, push the changes to the repository.
+        default: false
+        required: false
+        type: boolean
       jobs_run_on:
         default: ubuntu-latest
         description: The runner group on which jobs will run.
+        required: false
+        type: string
+      output_file:
+        description: The path to the output file.
+        default: 'README.md'
+        required: false
+        type: string
+      output_method:
+        description: The method to use for output.
+        default: 'inject'
         required: false
         type: string
       terragrunt_directory:
@@ -29,26 +49,6 @@
         default: '.'
         required: false
         type: string
-      config_file:
-        description: The path to the configuration file.
-        default: '.terraform-docs.yml'
-        required: false
-        type: string
-      output_file:
-        description: The path to the output file.
-        default: 'README.md'
-        required: false
-        type: string
-      output_method:
-        description: The method to use for output.
-        default: 'inject'
-        required: false
-        type: string
-      git_push:
-        description: If set to true, push the changes to the repository.
-        default: false
-        required: false
-        type: boolean
 
 jobs:
   terraform-docs:
