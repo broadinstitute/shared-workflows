@@ -1,0 +1,8 @@
+---
+site_name: 'GitHub Actions for Broad Institute Shared Workflows'
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core

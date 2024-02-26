@@ -1,0 +1,92 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      config_file:
+        description: The path to the configuration file.
+        default: '.terraform-docs.yml'
+        required: false
+        type: string
+      git_push:
+        description: If set to true, push the changes to the repository.
+        default: false
+        required: false
+        type: boolean
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      output_file:
+        description: The path to the output file.
+        default: 'README.md'
+        required: false
+        type: string
+      output_method:
+        description: The method to use for output.
+        default: 'inject'
+        required: false
+        type: string
+      terragrunt_directory:
+        default: 'prod'
+        description: The environment directory from which Terragrunt should run.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      use_terragrunt:
+        default: false
+        description: If set to true, use Terragrunt instead of Terraform.
+        required: false
+        type: boolean
+      working_directory:
+        description: |
+          The working directory where all jobs should be executed.
+          Comma separated list of directories to generate docs for.
+        default: '.'
+        required: false
+        type: string
+
+jobs:
+  terraform-docs:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    if: ${{ !inputs.use_terragrunt && github.actor != 'dependabot[bot]' }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Render terraform docs inside the README.md
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          config-file: ${{ inputs.config_file }}
+          git-push: ${{ inputs.git_push }}
+          output-file: ${{ inputs.output_file }}
+          output-method: ${{ inputs.output_method }}
+          working-dir: ${{ inputs.working_directory }}
+    timeout-minutes: ${{ inputs.timeout_minutes }}
+
+  terragrunt-docs:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    env:
+      DISABLE_INIT: true
+    if: ${{ inputs.use_terragrunt && github.actor != 'dependabot[bot]' }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Render terraform docs inside the README.md
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: ${{ inputs.working_directory }}
+          config-file: ${{ inputs.config_file }}
+          output-file: ${{ inputs.output_file }}
+          output-method: ${{ inputs.output_method }}
+          git-push: ${{ inputs.git_push }}
+    timeout-minutes: ${{ inputs.timeout_minutes }}
