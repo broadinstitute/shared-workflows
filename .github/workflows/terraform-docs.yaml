@@ -63,11 +63,11 @@ jobs:
       - name: Render terraform docs inside the README.md
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: ${{ inputs.working_directory }}
           config-file: ${{ inputs.config_file }}
+          git-push: ${{ inputs.git_push }}
           output-file: ${{ inputs.output_file }}
           output-method: ${{ inputs.output_method }}
-          git-push: ${{ inputs.git_push }}
+          working-dir: ${{ inputs.working_directory }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
 
   terragrunt-docs:
