@@ -1,8 +1,20 @@
 # Changelog
 
-## [2.1.0](https://github.com/broadinstitute/shared-workflows/tree/2.1.0) (2024-01-30)
+## [2.1.1](https://github.com/broadinstitute/shared-workflows/tree/2.1.1) (2024-02-26)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.0.1...2.1.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.0...2.1.1)
+
+**Implemented enhancements:**
+
+- feat: allow passing options to poetry install [\#61](https://github.com/broadinstitute/shared-workflows/pull/61) ([coreone](https://github.com/coreone))
+- build\(deps\): bump the actions group with 1 update [\#59](https://github.com/broadinstitute/shared-workflows/pull/59) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: Adding Terraform Docs [\#44](https://github.com/broadinstitute/shared-workflows/pull/44) ([tfhartmann](https://github.com/tfhartmann))
+- build\(deps\): bump the actions group with 2 updates [\#43](https://github.com/broadinstitute/shared-workflows/pull/43) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the actions group with 1 update [\#42](https://github.com/broadinstitute/shared-workflows/pull/42) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.1.0](https://github.com/broadinstitute/shared-workflows/tree/v2.1.0) (2024-01-30)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.0.1...v2.1.0)
 
 **Implemented enhancements:**
 

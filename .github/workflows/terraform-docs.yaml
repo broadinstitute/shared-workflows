@@ -3,13 +3,13 @@
   workflow_call:
     inputs:
       config_file:
-        description: The path to the configuration file.
         default: '.terraform-docs.yml'
+        description: The path to the configuration file.
         required: false
         type: string
       git_push:
-        description: If set to true, push the changes to the repository.
         default: false
+        description: If set to true, push the changes to the repository.
         required: false
         type: boolean
       jobs_run_on:
@@ -18,13 +18,13 @@
         required: false
         type: string
       output_file:
-        description: The path to the output file.
         default: 'README.md'
+        description: The path to the output file.
         required: false
         type: string
       output_method:
-        description: The method to use for output.
         default: 'inject'
+        description: The method to use for output.
         required: false
         type: string
       terragrunt_directory:
@@ -33,8 +33,8 @@
         required: false
         type: string
       timeout_minutes:
-        description: The maximum time (in minutes) for a job to run.
         default: 5
+        description: The maximum time (in minutes) for a job to run.
         required: false
         type: number
       use_terragrunt:
@@ -43,10 +43,10 @@
         required: false
         type: boolean
       working_directory:
+        default: '.'
         description: |
           The working directory where all jobs should be executed.
           Comma separated list of directories to generate docs for.
-        default: '.'
         required: false
         type: string
 
@@ -84,9 +84,9 @@ jobs:
       - name: Render terraform docs inside the README.md
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: ${{ inputs.working_directory }}
           config-file: ${{ inputs.config_file }}
+          git-push: ${{ inputs.git_push }}
           output-file: ${{ inputs.output_file }}
           output-method: ${{ inputs.output_method }}
-          git-push: ${{ inputs.git_push }}
+          working-dir: ${{ inputs.working_directory }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
