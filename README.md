@@ -136,8 +136,10 @@ This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
 
 #### python-deploy-to-pypi Inputs
 
-* `additional_packages`: String of additional packages that should be
-  installed. Default: ``
+* `additional_packages`: String of additional packages that should be installed.
+  Default: ``
+* `poetry_install_options`: Extra options to pass to Poetry when doing an install.
+  Default: `--no-root`
 * `python_version`: The version of [Python][5] to use. Default: `3.11`
 
 #### python-deploy-to-pypi Secrets
@@ -157,8 +159,10 @@ by setting the `use_ruff` input to `true`.
 
 #### python-lint Inputs
 
-* `additional_packages`: String of additional packages that should be
-  installed. Default: ``
+* `additional_packages`: String of additional packages that should be installed.
+  Default: ``
+* `poetry_install_options`: Extra options to pass to Poetry when doing an install.
+  Default: `--no-root`
 * `python_version`: The version of [Python][5] to use. Default: `3.11`
 * `ruff_version`: The version of [Ruff](https://github.com/astral-sh/ruff) to
   run. Default: `0.1.0`
@@ -175,8 +179,10 @@ This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
 
 #### python-test-deploy-to-pypi Inputs
 
-* `additional_packages`: String of additional packages that should be
-  installed. Default: ``
+* `additional_packages`: String of additional packages that should be installed.
+  Default: ``
+* `poetry_install_options`: Extra options to pass to Poetry when doing an install.
+  Default: `--no-root`
 * `python_version`: The version of [Python][5] to use. Default: `3.11`
 
 #### python-test-deploy-to-pypi Secrets
@@ -192,8 +198,10 @@ install any [Python][5] dependencies.
 
 #### python-unit-test Inputs
 
-* `additional_packages`: String of additional packages that should be
-  installed. Default: ``
+* `additional_packages`: String of additional packages that should be installed.
+  Default: ``
+* `poetry_install_options`: Extra options to pass to Poetry when doing an install.
+  Default: `--no-root`
 * `python_package_name`: The name of the [PyPi][2] package the repo will
   create. Default: ``
 * `python_versions`: The versions of [Python][5] to use in the unit tests, passed as a
