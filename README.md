@@ -211,6 +211,21 @@ install any [Python][5] dependencies.
 * `test_targets`: A list of directories to target for testing.
 [green](https://github.com/CleanCut/green) will autodetect if left blank. Default: ``
 
+### terraform-docs.yaml
+
+This workflow will setup and run [terraform-docs](https://terraform-docs.io/) to
+generate the [Terraform][10] documentation and store it in the README.md.
+
+#### terraform-docs Inputs
+
+* `config_file`: The path to the configuration file. Default: `.terraform-docs.yml`
+* `git_push`: If set to true, push the changes to the repository. Default: `false`
+* `output_file`: The path to the output file. Default: `README.md`
+* `output_method`: The method to use for output. Default: `inject`
+* `terragrunt_directory`: The environment directory from which Terragrunt should run.
+  Default: `prod`
+* `use_terragrunt`: If set to true, use Terragrunt instead of Terraform. Default: `false`
+
 ### terraform-lint.yaml
 
 This workflow will setup and run
