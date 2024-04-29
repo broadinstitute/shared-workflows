@@ -38,7 +38,7 @@ jobs:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
       - name: "Set up Ruby ${{ inputs.ruby_version }}"
-        uses: 'ruby/setup-ruby@v1.174.0'
+        uses: 'ruby/setup-ruby@v1.175.1'
         env:
           BUNDLE_SILENCE_ROOT_WARNING: '1'
           BUNDLE_WITH: 'development'
