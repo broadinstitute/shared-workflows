@@ -42,7 +42,7 @@ jobs:
       - name: 'Checkout repo'
         uses: 'actions/checkout@v4'
       - name: "Set up Ruby ${{ matrix.ruby }}"
-        uses: 'ruby/setup-ruby@v1.175.1'
+        uses: 'ruby/setup-ruby@v1.176.0'
         env:
           BUNDLE_SILENCE_ROOT_WARNING: '1'
           BUNDLE_WITH: 'development'
