@@ -62,7 +62,7 @@ jobs:
           github_token: ${{ secrets.wf_github_token }}
       - name: Run Trivy vulnerability scanner in IaC mode
         if: ${{ inputs.run_trivy == true }}
-        uses: 'aquasecurity/trivy-action@0.20.0'
+        uses: 'aquasecurity/trivy-action@0.21.0'
         with:
           exit-code: '1'
           scan-type: 'config'
