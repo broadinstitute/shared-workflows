@@ -1,8 +1,29 @@
 # Changelog
 
-## [2.1.1](https://github.com/broadinstitute/shared-workflows/tree/2.1.1) (2024-02-26)
+## [2.1.2](https://github.com/broadinstitute/shared-workflows/tree/2.1.2) (2024-06-24)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.0...2.1.1)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.1...2.1.2)
+
+**Implemented enhancements:**
+
+- feat!: remove old Python versions from default unit test versions [\#75](https://github.com/broadinstitute/shared-workflows/pull/75) ([coreone](https://github.com/coreone))
+- chore\(deps\): bump ruby/setup-ruby from 1.179.1 to 1.180.1 in the actions group [\#74](https://github.com/broadinstitute/shared-workflows/pull/74) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group with 2 updates [\#73](https://github.com/broadinstitute/shared-workflows/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group with 2 updates [\#72](https://github.com/broadinstitute/shared-workflows/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group with 2 updates [\#71](https://github.com/broadinstitute/shared-workflows/pull/71) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby/setup-ruby from 1.176.0 to 1.177.0 in the actions group [\#70](https://github.com/broadinstitute/shared-workflows/pull/70) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump aquasecurity/trivy-action from 0.19.0 to 0.20.0 in the actions group [\#69](https://github.com/broadinstitute/shared-workflows/pull/69) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby/setup-ruby from 1.175.1 to 1.176.0 in the actions group [\#68](https://github.com/broadinstitute/shared-workflows/pull/68) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby/setup-ruby from 1.174.0 to 1.175.1 in the actions group [\#67](https://github.com/broadinstitute/shared-workflows/pull/67) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby/setup-ruby from 1.173.0 to 1.174.0 in the actions group [\#66](https://github.com/broadinstitute/shared-workflows/pull/66) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump DavidAnson/markdownlint-cli2-action from 15 to 16 in the actions group [\#65](https://github.com/broadinstitute/shared-workflows/pull/65) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the actions group with 1 update [\#64](https://github.com/broadinstitute/shared-workflows/pull/64) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the actions group with 2 updates [\#63](https://github.com/broadinstitute/shared-workflows/pull/63) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the actions group with 1 update [\#62](https://github.com/broadinstitute/shared-workflows/pull/62) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.1.1](https://github.com/broadinstitute/shared-workflows/tree/v2.1.1) (2024-02-26)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.0...v2.1.1)
 
 **Implemented enhancements:**
 
