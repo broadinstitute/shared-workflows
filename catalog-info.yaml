@@ -3,7 +3,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: shared-workflows
-  description: Grafana is an open-source platform for monitoring and observability.
+  description: GitHub Action workflows that can be shared by multiple repositories
   tags:
     - bits
     - bits-tools
@@ -11,7 +11,7 @@ metadata:
 
   annotations:
     github.com/project-slug: broadinstitute/shared-workflows
-    # backstage.io/techdocs-ref: dir:.
+    backstage.io/techdocs-ref: dir:.
 
 spec:
   type: library
