@@ -1,0 +1,38 @@
+---
+name: Make CI
+
+'on':
+  workflow_call:
+    inputs:
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 10
+        required: false
+        type: number
+
+jobs:
+  make-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+      - name: Install prettier
+        run: yarn add prettier@3
+      - name: Put node executables in the system PATH
+        run: echo -n "$(yarn bin)" >> $GITHUB_PATH
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          cache: poetry
+          python-version: "3.12"
+      - name: Install package
+        run: poetry install
+      - name: Run all CI
+        run: make ci
+    timeout-minutes: ${{ inputs.timeout_minutes }}
