@@ -61,7 +61,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Render terraform docs inside the README.md
-        uses: terraform-docs/gh-actions@v1.2.2
+        uses: terraform-docs/gh-actions@v1.3.0
         with:
           config-file: ${{ inputs.config_file }}
           git-push: ${{ inputs.git_push }}
@@ -82,7 +82,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Render terraform docs inside the README.md
-        uses: terraform-docs/gh-actions@v1.2.2
+        uses: terraform-docs/gh-actions@v1.3.0
         with:
           config-file: ${{ inputs.config_file }}
           git-push: ${{ inputs.git_push }}
