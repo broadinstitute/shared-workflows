@@ -208,8 +208,11 @@ install any [Python][5] dependencies.
   string in JSON format with `versions` as the key. Default:
   `'{ "versions": [ "3.7", "3.8", "3.9", "3.10", "3.11" ] }'`
   * **Note: Make sure to enclose the JSON string in single quotes!!**
-* `test_targets`: A list of directories to target for testing.
-[green](https://github.com/CleanCut/green) will autodetect if left blank. Default: ``
+* `run_coverage`: Boolean to determine whether coverage should be run or not. Default:
+`true`
+* `test_runner`: The runner used to run all the unit tests. Default: `green`
+* `test_targets`: A list of directories to target for testing. Runners should autodetect
+if left blank. Default: ``
 
 ### terraform-docs.yaml
 
