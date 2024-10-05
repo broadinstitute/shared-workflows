@@ -29,6 +29,16 @@ name: Python Checks
         description: The name of the PyPi package the repo will create.
         required: false
         type: string
+      run_coverage:
+        default: true
+        description: Boolean to determine whether coverage should be run or not.
+        required: false
+        type: boolean
+      test_runner:
+        default: 'green'
+        description: The runner used to run all the unit tests.
+        required: false
+        type: string
       test_targets:
         default: ''
         description: The directories to target for testing.
@@ -73,10 +83,12 @@ jobs:
         run: poetry check
       - name: Install dependencies
         run: poetry install ${{ inputs.poetry_install_options }}
-      - name: Test with green
+      - name: Run unit tests
         run: |
-          poetry run green ${{ inputs.test_targets }}
-          poetry run coverage xml
+          poetry run ${{ inputs.test_runner }} ${{ inputs.test_targets }}
+      - name: Run coverage report
+        if: ${{ inputs.run_coverage }}
+        run: poetry run coverage xml
       - name: Run a test module build and install
         if: ${{ inputs.python_package_name != '' }}
         run: |
