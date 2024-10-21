@@ -172,6 +172,20 @@ by setting the `use_ruff` input to `true`.
 * `use_ruff`: If true, use [Ruff](https://github.com/astral-sh/ruff) to lint
   the repository. Default: `false`
 
+### python-make-ci.yaml
+
+This workflow will setup [Python][5] (`3.12`) and run `make ci` on the
+repository. [Poetry][3] is used to install any [Python][5] dependencies. It is
+the responsibility of the repository owner to correctly setup a `Makefile` to
+correctly do all the CI tasks for their repository. The `prettier` application
+as well as Node 22.x are also available to this workflow.
+
+#### python-make-ci Inputs
+
+There are no additional inputs for this workflow. Additionally, the
+`jobs_run_on` input is not available for this workflow as the job is forced to
+use `ubuntu-latest` for the base image.
+
 ### python-test-deploy-to-pypi.yaml
 
 This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the

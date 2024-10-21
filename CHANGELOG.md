@@ -1,8 +1,34 @@
 # Changelog
 
-## [2.1.2](https://github.com/broadinstitute/shared-workflows/tree/2.1.2) (2024-06-24)
+## [2.3.0](https://github.com/broadinstitute/shared-workflows/tree/2.3.0) (2024-10-21)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.1...2.1.2)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.2.0...2.3.0)
+
+**Implemented enhancements:**
+
+- feat: Allow changing working dir for make-ci [\#92](https://github.com/broadinstitute/shared-workflows/pull/92) ([lbenezriravin](https://github.com/lbenezriravin))
+- chore\(deps\): bump aquasecurity/trivy-action from 0.24.0 to 0.27.0 in the actions group [\#91](https://github.com/broadinstitute/shared-workflows/pull/91) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ruby/setup-ruby from 1.194.0 to 1.196.0 in the actions group [\#90](https://github.com/broadinstitute/shared-workflows/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: Allow other Python unit test runners [\#89](https://github.com/broadinstitute/shared-workflows/pull/89) ([coreone](https://github.com/coreone))
+- chore\(deps\): bump ruby/setup-ruby from 1.193.0 to 1.194.0 in the actions group [\#88](https://github.com/broadinstitute/shared-workflows/pull/88) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group with 2 updates [\#87](https://github.com/broadinstitute/shared-workflows/pull/87) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group with 2 updates [\#86](https://github.com/broadinstitute/shared-workflows/pull/86) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group with 2 updates [\#85](https://github.com/broadinstitute/shared-workflows/pull/85) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.2.0](https://github.com/broadinstitute/shared-workflows/tree/v2.2.0) (2024-08-12)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.2...v2.2.0)
+
+**Implemented enhancements:**
+
+- feat: add 'make-ci' workflow [\#84](https://github.com/broadinstitute/shared-workflows/pull/84) ([lbenezriravin](https://github.com/lbenezriravin))
+- chore\(deps\): bump ruby/setup-ruby from 1.187.0 to 1.190.0 in the actions group across 1 directory [\#83](https://github.com/broadinstitute/shared-workflows/pull/83) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group across 1 directory with 2 updates [\#81](https://github.com/broadinstitute/shared-workflows/pull/81) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump the actions group across 1 directory with 2 updates [\#78](https://github.com/broadinstitute/shared-workflows/pull/78) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.1.2](https://github.com/broadinstitute/shared-workflows/tree/v2.1.2) (2024-06-24)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.1.1...v2.1.2)
 
 **Implemented enhancements:**
 
