@@ -9,9 +9,18 @@ name: Make CI
         default: 10
         required: false
         type: number
+      working_directory:
+        default: "."
+        description: >-
+          The directory where pyproject.toml and Makefile exist, relative to the project root
+        required: false
+        type: string
 
 jobs:
   make-ci:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
