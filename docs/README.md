@@ -38,10 +38,13 @@ the [Poetry][3] configuration in the repository using this workflow.
 
 ### conventional-commit.yaml
 
-This workflow will run the
-[lab42/conventional-commit](https://github.com/lab42/conventional-commit)
-action with a `description_regexp` of `(.*)`. This check makes sure commits and
-PR titles follow [Conventional Commits][1].
+This workflow will run the[commitlint](https://commitlint.js.org/)
+By default it only checks that PR titles follow [Conventional Commits][1].
+In addition the 'subject-case' and 'body-max-line-length' checks are disabled.
+
+* `validate_pr_title`: Validate PR title. Default: true
+* `validate_current_commit`: Validate current commit (last commit). Default: false
+* validate_pr_commits: Validate PR commits. Default: false
 
 ### local-checks.yaml
 
