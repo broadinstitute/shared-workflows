@@ -1,8 +1,20 @@
 # Changelog
 
-## [2.3.0](https://github.com/broadinstitute/shared-workflows/tree/2.3.0) (2024-10-21)
+## [2.4.0](https://github.com/broadinstitute/shared-workflows/tree/2.4.0) (2024-11-04)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.2.0...2.3.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.3.0...2.4.0)
+
+**Implemented enhancements:**
+
+- chore\(deps\): bump the actions group with 2 updates [\#95](https://github.com/broadinstitute/shared-workflows/pull/95) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+**Fixed bugs:**
+
+- fix\(refactor\): Replace CI workflow with commitlint [\#96](https://github.com/broadinstitute/shared-workflows/pull/96) ([tfhartmann](https://github.com/tfhartmann))
+
+## [v2.3.0](https://github.com/broadinstitute/shared-workflows/tree/v2.3.0) (2024-10-21)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.2.0...v2.3.0)
 
 **Implemented enhancements:**
 
