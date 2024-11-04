@@ -17,6 +17,21 @@
         default: '.'
         required: false
         type: string
+      validate_pr_title:
+        description: Validate PR title
+        default: true
+        required: false
+        type: boolean
+      validate_current_commit:
+        description: Validate current commit (last commit)
+        default: false
+        required: false
+        type: boolean
+      validate_pr_commits:
+        description: Validate PR commits
+        default: false
+        required: false
+        type: boolean
 
 jobs:
   conventional-commits:
@@ -25,8 +40,41 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: Validate PR title
-        uses: 'lab42/conventional-commit@v0.2.2'
+      - uses: actions/checkout@v4
         with:
-          description_regexp: '(.*)'
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install commitlint
+        run: |
+          npm install --save-dev @commitlint/{cli,config-conventional}
+          # I hate myself for the below
+          cat <<- EOF > commitlint.config.ts
+          import type {UserConfig} from '@commitlint/types';
+          import {RuleConfigSeverity} from '@commitlint/types';
+
+          const Configuration: UserConfig = {
+
+            extends: ['@commitlint/config-conventional'],
+            rules: {
+              'subject-case': [0, 'never', []],
+              'body-max-line-length': [0, 'always', 100],
+            },
+          };
+          export default Configuration;
+          EOF
+
+      - name: Validate PR Title
+        if: github.event_name == 'pull_request' && inputs.validate_pr_title == true
+        run: echo "${{ github.event.pull_request.title }}" | npx commitlint --verbose
+
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push' && inputs.validate_current_commit == true
+        run: npx commitlint --last --verbose
+
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request' && inputs.validate_pr_commits == true
+        # yamllint disable-line rule:line-length
+        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
     timeout-minutes: ${{ inputs.timeout_minutes }}
