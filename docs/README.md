@@ -46,6 +46,22 @@ In addition the 'subject-case' and 'body-max-line-length' checks are disabled.
 * `validate_current_commit`: Validate current commit (last commit). Default: false
 * validate_pr_commits: Validate PR commits. Default: false
 
+### Close Stale Issues and PRs
+
+This workflow will close any issues or PRs that have been inactive for a certain amount of time. By default, this is set to 30 days. This workflow is based on the `actions/stale`.
+
+```yaml
+---
+name: 'Close stale issues and PRs'
+
+'on':
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  stale:
+    uses: broadinstitute/shared-workflows/.github/workflows/close-stale.yaml
+```
 ### local-checks.yaml
 
 These are local Actions that run for this repository. This workflow is not

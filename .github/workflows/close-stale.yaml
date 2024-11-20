@@ -1,0 +1,40 @@
+---
+'on':
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: '.'
+        required: false
+        type: string
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-issue-message: |
+            This issue is stale because it has been open 60 days with no activity.
+            Remove stale label or comment or this will be closed in 5 days.
+          stale-pr-message: |
+            This PR is stale because it has been open 60 days with no activity.
+            Remove stale label or comment or this will be closed in 10 days.
+          close-issue-message: |
+            This issue was closed because it has been stalled for 5 days with no activity.
+          close-pr-message: |
+            This PR was closed because it has been stalled for 10 days with no activity.
+          days-before-issue-stale: 60
+          days-before-pr-stale: 60
+          days-before-issue-close: 5
+          days-before-pr-close: 10
