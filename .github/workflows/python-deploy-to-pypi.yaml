@@ -20,7 +20,7 @@ name: pypi_deploy
         required: false
         type: string
       python_version:
-        default: '3.11'
+        default: '3.12'
         description: The version of Python to use for the run.
         required: false
         type: string
