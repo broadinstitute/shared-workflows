@@ -20,7 +20,7 @@ name: Python Checks
         required: false
         type: string
       python_versions:
-        default: '{ "versions": [ "3.9", "3.10", "3.11" ] }'
+        default: '{ "versions": [ "3.9", "3.10", "3.11", "3.12" ] }'
         description: The versions of Python on which the unit tests should run.
         required: false
         type: string

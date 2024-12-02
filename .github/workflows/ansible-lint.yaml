@@ -16,7 +16,7 @@ name: python-linting
         type: string
       python_version:
         description: The version of Python to use for the run.
-        default: '3.11'
+        default: '3.12'
         required: false
         type: string
       timeout_minutes:

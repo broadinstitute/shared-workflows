@@ -24,7 +24,7 @@ command as part of their commits.
 
 ### ansible-lint.yaml
 
-This workflow will setup [Python][5] (`3.11`) and lint the repository using both
+This workflow will setup [Python][5] (`3.12`) and lint the repository using both
 [yamllint][13] and [ansible-lint](https://github.com/ansible/ansible-lint). [Poetry][3]
 is used to install the [Python][5] dependencies. Both [yamllint][13] and
 [ansible-lint](https://github.com/ansible/ansible-lint) are expected to be installed by
@@ -34,21 +34,13 @@ the [Poetry][3] configuration in the repository using this workflow.
 
 * `additional_packages`: String of additional packages that should be
   installed. Default: ``
-* `python_version`: The version of [Python][5] to use. Default: `3.11`
+* `python_version`: The version of [Python][5] to use. Default: `3.12`
 
-### conventional-commit.yaml
+### close-stale.yaml
 
-This workflow will run the[commitlint](https://commitlint.js.org/)
-By default it only checks that PR titles follow [Conventional Commits][1].
-In addition the 'subject-case' and 'body-max-line-length' checks are disabled.
-
-* `validate_pr_title`: Validate PR title. Default: true
-* `validate_current_commit`: Validate current commit (last commit). Default: false
-* validate_pr_commits: Validate PR commits. Default: false
-
-### Close Stale Issues and PRs
-
-This workflow will close any issues or PRs that have been inactive for a certain amount of time. By default, this is set to 30 days. This workflow is based on the `actions/stale`.
+This workflow will close any issues or PRs that have been inactive for a
+certain amount of time. By default, this is set to 30 days. This workflow is
+based on the `actions/stale`.
 
 ```yaml
 ---
@@ -62,6 +54,17 @@ jobs:
   stale:
     uses: broadinstitute/shared-workflows/.github/workflows/close-stale.yaml
 ```
+
+### conventional-commit.yaml
+
+This workflow will run the[commitlint](https://commitlint.js.org/)
+By default it only checks that PR titles follow [Conventional Commits][1].
+In addition the 'subject-case' and 'body-max-line-length' checks are disabled.
+
+* `validate_pr_title`: Validate PR title. Default: true
+* `validate_current_commit`: Validate current commit (last commit). Default: false
+* validate_pr_commits: Validate PR commits. Default: false
+
 ### local-checks.yaml
 
 These are local Actions that run for this repository. This workflow is not
@@ -125,7 +128,7 @@ This workflow will setup [Puppet][7] using
 `3.2`). The linting and dependency installations will all happen using
 [PDK][9].
 
-#### puppet-linting Inputs
+#### puppet-lint Inputs
 
 * `puppet_version`: The version of [Puppet][7] to use in [PDK][9]. Default: `7`
 * `ruby_version`: The version of [Ruby][8] to use. Default: `3.2`
@@ -150,7 +153,7 @@ tests will all happen using [PDK][9].
 
 ### python-deploy-to-pypi.yaml
 
-This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
+This workflow will setup [Python][5] (`3.12`) and do a build and deploy of the
 [Python][5] package to [PyPi][2] using [Poetry][3].
 
 #### python-deploy-to-pypi Inputs
@@ -159,7 +162,7 @@ This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
   Default: ``
 * `poetry_install_options`: Extra options to pass to Poetry when doing an install.
   Default: `--no-root`
-* `python_version`: The version of [Python][5] to use. Default: `3.11`
+* `python_version`: The version of [Python][5] to use. Default: `3.12`
 
 #### python-deploy-to-pypi Secrets
 
@@ -168,7 +171,7 @@ This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
 
 ### python-lint.yaml
 
-This workflow will setup [Python][5] (`3.11`) and lint the repository.
+This workflow will setup [Python][5] (`3.12`) and lint the repository.
 [Poetry][3] is used to install any [Python][5] dependencies. By default the
 linters run are [yamllint][13], and
 [pylama](https://github.com/AtomLinter/linter-pylama). As of August 2023,
@@ -182,9 +185,9 @@ by setting the `use_ruff` input to `true`.
   Default: ``
 * `poetry_install_options`: Extra options to pass to Poetry when doing an install.
   Default: `--no-root`
-* `python_version`: The version of [Python][5] to use. Default: `3.11`
+* `python_version`: The version of [Python][5] to use. Default: `3.12`
 * `ruff_version`: The version of [Ruff](https://github.com/astral-sh/ruff) to
-  run. Default: `0.1.0`
+  run. Default: `0.8.1`
 * `use_pylama`: If true, use
   [pylama](https://github.com/AtomLinter/linter-pylama) to lint the repository.
   Default: `true`
@@ -207,7 +210,7 @@ use `ubuntu-latest` for the base image.
 
 ### python-test-deploy-to-pypi.yaml
 
-This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
+This workflow will setup [Python][5] (`3.12`) and do a build and deploy of the
 [Python][5] package to [Test PyPi][6] using [Poetry][3].
 
 #### python-test-deploy-to-pypi Inputs
@@ -216,7 +219,7 @@ This workflow will setup [Python][5] (`3.11`) and do a build and deploy of the
   Default: ``
 * `poetry_install_options`: Extra options to pass to Poetry when doing an install.
   Default: `--no-root`
-* `python_version`: The version of [Python][5] to use. Default: `3.11`
+* `python_version`: The version of [Python][5] to use. Default: `3.12`
 
 #### python-test-deploy-to-pypi Secrets
 
@@ -239,7 +242,7 @@ install any [Python][5] dependencies.
   create. Default: ``
 * `python_versions`: The versions of [Python][5] to use in the unit tests, passed as a
   string in JSON format with `versions` as the key. Default:
-  `'{ "versions": [ "3.7", "3.8", "3.9", "3.10", "3.11" ] }'`
+  `'{ "versions": [ "3.9", "3.10", "3.11", "3.12" ] }'`
   * **Note: Make sure to enclose the JSON string in single quotes!!**
 * `run_coverage`: Boolean to determine whether coverage should be run or not. Default:
 `true`
@@ -315,11 +318,11 @@ check `terragrunt hclfmt` will also be run.
 #### terraform-validate Inputs
 
 * `terraform_version`: The version of Terraform to use when validating.
-  Default: `1.5.5`
+  Default: `1.10.0`
 * `terragrunt_directory`: The environment directory from which Terragrunt
   should run. Default: `prod`
 * `terragrunt_version`: The version of Terragrunt to use when validating.
-  Default: `0.48.7`
+  Default: `0.69.3`
 * `use_terragrunt`: If set to true, use Terragrunt instead of Terraform.
   Default: `false`
 
