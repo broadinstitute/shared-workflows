@@ -1,8 +1,21 @@
 # Changelog
 
-## [2.4.0](https://github.com/broadinstitute/shared-workflows/tree/2.4.0) (2024-11-04)
+## [2.5.0](https://github.com/broadinstitute/shared-workflows/tree/2.5.0) (2024-12-02)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.3.0...2.4.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.4.0...2.5.0)
+
+**Implemented enhancements:**
+
+- feat: Bump default versions of Python, Node, Ruff, Terraform, Terragrunt [\#103](https://github.com/broadinstitute/shared-workflows/pull/103) ([coreone](https://github.com/coreone))
+- chore\(deps\): bump aquasecurity/trivy-action from 0.28.0 to 0.29.0 in the actions group [\#102](https://github.com/broadinstitute/shared-workflows/pull/102) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: Add workflow to close stale issues and PR's [\#101](https://github.com/broadinstitute/shared-workflows/pull/101) ([tfhartmann](https://github.com/tfhartmann))
+- chore\(deps\): bump DavidAnson/markdownlint-cli2-action from 17 to 18 in the actions group [\#100](https://github.com/broadinstitute/shared-workflows/pull/100) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ruby/setup-ruby from 1.199.0 to 1.202.0 in the actions group [\#99](https://github.com/broadinstitute/shared-workflows/pull/99) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ruby/setup-ruby from 1.197.0 to 1.199.0 in the actions group [\#98](https://github.com/broadinstitute/shared-workflows/pull/98) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.4.0](https://github.com/broadinstitute/shared-workflows/tree/v2.4.0) (2024-11-04)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.3.0...v2.4.0)
 
 **Implemented enhancements:**
 
