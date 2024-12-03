@@ -1,8 +1,16 @@
 # Changelog
 
-## [2.5.0](https://github.com/broadinstitute/shared-workflows/tree/2.5.0) (2024-12-02)
+## [2.5.1](https://github.com/broadinstitute/shared-workflows/tree/2.5.1) (2024-12-03)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.4.0...2.5.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.5.0...2.5.1)
+
+**Fixed bugs:**
+
+- fix: Allow longer body and header sizes in conventional-commit [\#105](https://github.com/broadinstitute/shared-workflows/pull/105) ([coreone](https://github.com/coreone))
+
+## [v2.5.0](https://github.com/broadinstitute/shared-workflows/tree/v2.5.0) (2024-12-02)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.4.0...v2.5.0)
 
 **Implemented enhancements:**
 
