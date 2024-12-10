@@ -17,6 +17,34 @@
         default: '.'
         required: false
         type: string
+      days_before_issue_stale:
+        description: Number of days before an issue is considered stale.
+        default: 60
+        required: false
+        type: number
+
+      days_before_pr_stale:
+        description: Number of days before a PR is considered stale.
+        default: 60
+        required: false
+        type: number
+
+      days_before_issue_close:
+        description: >-
+          The idle number of days before closing the stale issues or
+          the stale pull requests (due to the stale label).
+        default: 5
+        required: false
+        type: number
+
+      days_before_pr_close:
+        description: >-
+          The idle number of days before closing the stale issues or
+          the stale pull requests (due to the stale label).
+        default: 10
+        required: false
+        type: number
+
 
 jobs:
   stale:
