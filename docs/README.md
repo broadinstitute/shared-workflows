@@ -54,6 +54,12 @@ jobs:
   stale:
     uses: broadinstitute/shared-workflows/.github/workflows/close-stale.yaml
 ```
+#### close-stale Inputs
+
+* `days_before_issue_stale`: Number of days before an issue is considered stale. Default to 60
+* `days_before_pr_stale`: Description: Number of days before a PR is considered stale. Default to 60
+* `days_before_issue_close`: The idle number of days before closing the stale issues or the stale pull requests (due to the stale label). Defaults to 5
+* `days_before_pr_close`: The idle number of days before closing the stale issues or the stale pull requests (due to the stale label). Defaults to 10
 
 ### conventional-commit.yaml
 
