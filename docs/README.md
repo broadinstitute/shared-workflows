@@ -65,6 +65,41 @@ In addition the 'subject-case' and 'body-max-line-length' checks are disabled.
 * `validate_current_commit`: Validate current commit (last commit). Default: false
 * validate_pr_commits: Validate PR commits. Default: false
 
+#### Conventional Release-Labels
+
+The conventional commit workflow will also add labels to the PR based on
+based on Conventional Commits. By default, only labels are added.
+
+These labels can be used in conjunction GitHub's
+[automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes)
+
+In order to use this automatic release notes feature, you must a `.github/release.yaml` file
+
+```Yaml
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - octocat
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - breaking
+    - title: Exciting New Features 🎉
+      labels:
+        - feature
+    - title: Fixes 🔧
+      labels:
+        - fix
+    - title: Other Changes
+      labels:
+        - "*"
+```
+
+More info on this can be found in the [release labels action](https://github.com/bcoe/conventional-release-labels?tab=readme-ov-file#conventional-release-labels)
+and the [release-please-action](https://github.com/googleapis/release-please-action)
+
 ### local-checks.yaml
 
 These are local Actions that run for this repository. This workflow is not
