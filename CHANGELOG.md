@@ -1,8 +1,16 @@
 # Changelog
 
-## [2.6.0](https://github.com/broadinstitute/shared-workflows/tree/2.6.0) (2025-01-06)
+## [2.6.1](https://github.com/broadinstitute/shared-workflows/tree/2.6.1) (2025-01-06)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.5.0...2.6.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.6.0...2.6.1)
+
+**Fixed bugs:**
+
+- fix: Update conventional-commit workflow [\#112](https://github.com/broadinstitute/shared-workflows/pull/112) ([tfhartmann](https://github.com/tfhartmann))
+
+## [v2.6.0](https://github.com/broadinstitute/shared-workflows/tree/v2.6.0) (2025-01-06)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.5.0...v2.6.0)
 
 **Implemented enhancements:**
 
