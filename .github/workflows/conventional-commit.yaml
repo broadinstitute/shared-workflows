@@ -39,6 +39,7 @@ jobs:
       run:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
+    if: ${{ github.actor != 'dependabot[bot]'  || github.actor != 'pre-commit-ci[bot]'}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -79,3 +80,8 @@ jobs:
         # yamllint disable-line rule:line-length
         run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
     timeout-minutes: ${{ inputs.timeout_minutes }}
+
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bcoe/conventional-release-labels@v1.3.1
