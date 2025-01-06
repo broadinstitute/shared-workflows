@@ -1,8 +1,22 @@
 # Changelog
 
-## [2.5.0](https://github.com/broadinstitute/shared-workflows/tree/2.5.0) (2024-12-02)
+## [2.6.0](https://github.com/broadinstitute/shared-workflows/tree/2.6.0) (2025-01-06)
 
-[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.4.0...2.5.0)
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.5.0...2.6.0)
+
+**Implemented enhancements:**
+
+- chore\(deps\): bump the actions group across 1 directory with 2 updates [\#111](https://github.com/broadinstitute/shared-workflows/pull/111) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ruby/setup-ruby from 1.202.0 to 1.204.0 in the actions group across 1 directory [\#109](https://github.com/broadinstitute/shared-workflows/pull/109) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: Add workflow step for conventional release labels [\#108](https://github.com/broadinstitute/shared-workflows/pull/108) ([tfhartmann](https://github.com/tfhartmann))
+
+**Fixed bugs:**
+
+- fix: Allow longer body and header sizes in conventional-commit [\#105](https://github.com/broadinstitute/shared-workflows/pull/105) ([coreone](https://github.com/coreone))
+
+## [v2.5.0](https://github.com/broadinstitute/shared-workflows/tree/v2.5.0) (2024-12-02)
+
+[Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.4.0...v2.5.0)
 
 **Implemented enhancements:**
 
