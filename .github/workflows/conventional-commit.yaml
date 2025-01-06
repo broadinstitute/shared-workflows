@@ -33,9 +33,6 @@
         required: false
         type: boolean
 
-permissions:
-  pull-requests: write
-
 jobs:
   conventional-commits:
     defaults:
@@ -85,6 +82,8 @@ jobs:
     timeout-minutes: ${{ inputs.timeout_minutes }}
 
   label:
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: bcoe/conventional-release-labels@v1.3.1
