@@ -8,43 +8,39 @@
         required: false
         type: string
       timeout_minutes:
-        description: The maximum time (in minutes) for a job to run.
         default: 5
+        description: The maximum time (in minutes) for a job to run.
         required: false
         type: number
       working_directory:
-        description: The working directory where all jobs should be executed.
         default: '.'
+        description: The working directory where all jobs should be executed.
         required: false
         type: string
       days_before_issue_stale:
+        default: 60
         description: Number of days before an issue is considered stale.
-        default: 60
         required: false
         type: number
-
       days_before_pr_stale:
-        description: Number of days before a PR is considered stale.
         default: 60
+        description: Number of days before a PR is considered stale.
         required: false
         type: number
-
       days_before_issue_close:
-        description: >-
-          The idle number of days before closing the stale issues or
-          the stale pull requests (due to the stale label).
         default: 5
-        required: false
-        type: number
-
-      days_before_pr_close:
         description: >-
           The idle number of days before closing the stale issues or
           the stale pull requests (due to the stale label).
-        default: 10
         required: false
         type: number
-
+      days_before_pr_close:
+        default: 10
+        description: >-
+          The idle number of days before closing the stale issues or
+          the stale pull requests (due to the stale label).
+        required: false
+        type: number
 
 jobs:
   stale:
@@ -52,17 +48,19 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
+          close-issue-message: |
+            This issue was closed because it has been stalled for 5 days with no activity.
+          close-pr-message: |
+            This PR was closed because it has been stalled for 10 days with no activity.
+          days-before-issue-close: ${{ inputs.days_before_issue_close }}
+          days-before-issue-stale: ${{ inputs.days_before_issue_stale }}
+          days-before-pr-close: ${{ inputs.days_before_pr_close }}
+          days-before-pr-stale: ${{ inputs.days_before_pr_stale }}
+          exempt-issue-labels: "exempt-from-stale"
+          exempt-pr-labels: "exempt-from-stale"
           stale-issue-message: |
             This issue is stale because it has been open 60 days with no activity.
             Remove stale label or comment or this will be closed in 5 days.
           stale-pr-message: |
             This PR is stale because it has been open 60 days with no activity.
             Remove stale label or comment or this will be closed in 10 days.
-          close-issue-message: |
-            This issue was closed because it has been stalled for 5 days with no activity.
-          close-pr-message: |
-            This PR was closed because it has been stalled for 10 days with no activity.
-          days-before-issue-stale: ${{ inputs.days_before_issue_stale }}
-          days-before-pr-stale: ${{ inputs.days_before_pr_stale }}
-          days-before-issue-close: ${{ inputs.days_before_issue_close }}
-          days-before-pr-close: ${{ inputs.days_before_pr_close }}
