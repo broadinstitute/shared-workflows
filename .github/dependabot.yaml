@@ -2,14 +2,13 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
+    commit-message:
+      prefix: feat
     directory: '/'
     groups:
       actions:
         patterns:
           - '*'
-    labels:
-      - 'dependencies'
-      - 'enhancement'
     schedule:
       # Check for updates to GitHub Actions every week
       interval: weekly
