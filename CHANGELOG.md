@@ -1,6 +1,13 @@
 # Changelog
 
-## [2.6.1](https://github.com/broadinstitute/shared-workflows/tree/2.6.1) (2025-01-06)
+## Future Releases
+
+All future changes will be documented using GitHub
+[Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases):
+
+[https://github.com/broadinstitute/shared-workflows/releases](https://github.com/broadinstitute/shared-workflows/releases)
+
+## [v2.6.1](https://github.com/broadinstitute/shared-workflows/tree/2.6.1) (2025-01-06)
 
 [Full Changelog](https://github.com/broadinstitute/shared-workflows/compare/v2.6.0...2.6.1)
 

@@ -1,8 +1,0 @@
-breaking-labels=backwards-incompatible,breaking
-bug-labels=bug,Bug,fix
-enhancement-labels=enhancement,Enhancement,feature
-exclude-labels=duplicate,ignore-for-release,invalid,maintenance,question,wontfix
-pr-wo-labels=false
-project=shared-workflows
-unreleased=true
-user=broadinstitute
