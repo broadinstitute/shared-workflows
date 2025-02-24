@@ -4,6 +4,11 @@ name: Make CI
 'on':
   workflow_call:
     inputs:
+      additional_packages:
+        default: ''
+        description: String of additional packages that should be installed.
+        required: false
+        type: string
       timeout_minutes:
         description: The maximum time (in minutes) for a job to run.
         default: 10
@@ -23,6 +28,11 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ubuntu-latest
     steps:
+      - name: Install additional packages
+        if: ${{ inputs.additional_packages != '' }}
+        run: |
+          sudo apt-get update -yq
+          sudo apt-get install -y ${{ inputs.additional_packages }}
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Set up Node.js

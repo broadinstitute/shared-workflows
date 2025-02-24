@@ -48,7 +48,9 @@ jobs:
     steps:
       - name: Install additional packages
         if: ${{ inputs.additional_packages != '' }}
-        run: sudo apt-get install -y ${{ inputs.additional_packages }}
+        run: |
+          sudo apt-get update -yq
+          sudo apt-get install -y ${{ inputs.additional_packages }}
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Install poetry
