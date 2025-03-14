@@ -24,11 +24,24 @@ jobs:
       run:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
+    env:
+      ADRS_VERSION: 0.3.0
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      - name: Install adr tools
-        run: git clone https://github.com/npryce/adr-tools.git
-      - name: 'Test for uncommitted changes'
-        run: adr-tools/src/adr generate toc | diff README.md -
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            ~/.cargo/bin/
+          key: ${{ runner.os }}-adrs@${{ env.ADRS_VERSION }}
+      - name: Install adrs
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: cargo install adrs@$ADRS_VERSION
+      - name: Verify that TOC is current and properly formatted
+        run: diff README.md <(~/.cargo/bin/adrs generate toc --ordered)
     timeout-minutes: ${{ inputs.timeout_minutes }}
