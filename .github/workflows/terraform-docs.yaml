@@ -60,10 +60,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Render terraform docs inside the README.md
         uses: terraform-docs/gh-actions@v1.3.0
         with:
           config-file: ${{ inputs.config_file }}
+          git-commit-message: "chore(terraform-docs): automated action [skip ci]"
           git-push: ${{ inputs.git_push }}
           output-file: ${{ inputs.output_file }}
           output-method: ${{ inputs.output_method }}
@@ -81,10 +84,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Render terraform docs inside the README.md
         uses: terraform-docs/gh-actions@v1.3.0
         with:
           config-file: ${{ inputs.config_file }}
+          git-commit-message: "chore(terraform-docs): automated action [skip ci]"
           git-push: ${{ inputs.git_push }}
           output-file: ${{ inputs.output_file }}
           output-method: ${{ inputs.output_method }}
