@@ -7,6 +7,11 @@
         description: The path to the configuration file.
         required: false
         type: string
+      fail_on_diff:
+        default: false
+        description: Fail the Action if terraform-docs
+        required: false
+        type: boolean
       git_push:
         default: false
         description: If set to true, push the changes to the repository.
@@ -64,6 +69,7 @@ jobs:
         uses: terraform-docs/gh-actions@v1.3.0
         with:
           config-file: ${{ inputs.config_file }}
+          fail-on-diff: ${{ inputs.fail_on_diff }}
           git-push: ${{ inputs.git_push }}
           output-file: ${{ inputs.output_file }}
           output-method: ${{ inputs.output_method }}
@@ -85,6 +91,7 @@ jobs:
         uses: terraform-docs/gh-actions@v1.3.0
         with:
           config-file: ${{ inputs.config_file }}
+          fail-on-diff: ${{ inputs.fail_on_diff }}
           git-push: ${{ inputs.git_push }}
           output-file: ${{ inputs.output_file }}
           output-method: ${{ inputs.output_method }}
