@@ -32,6 +32,11 @@
         default: ''
         required: false
         type: string
+      trivy_version:
+        description: The version of Trivy to run.
+        default: 'latest'
+        required: false
+        type: string
       working_directory:
         description: The working directory where all jobs should be executed.
         default: '.'
@@ -68,4 +73,5 @@ jobs:
           scan-type: 'config'
           severity: 'CRITICAL,HIGH'
           skip-files: ${{ inputs.trivy_skip_files }}
+          version: ${{ inputs.trivy_version }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
