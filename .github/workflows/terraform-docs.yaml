@@ -66,7 +66,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Render terraform docs inside the README.md
-        uses: terraform-docs/gh-actions@v1.3.0
+        uses: terraform-docs/gh-actions@v1.4.1
         with:
           config-file: ${{ inputs.config_file }}
           fail-on-diff: ${{ inputs.fail_on_diff }}
@@ -88,7 +88,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Render terraform docs inside the README.md
-        uses: terraform-docs/gh-actions@v1.3.0
+        uses: terraform-docs/gh-actions@v1.4.1
         with:
           config-file: ${{ inputs.config_file }}
           fail-on-diff: ${{ inputs.fail_on_diff }}
