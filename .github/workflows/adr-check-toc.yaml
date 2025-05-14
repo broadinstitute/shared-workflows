@@ -17,6 +17,11 @@
         default: '.'
         required: false
         type: string
+      toc_file:
+        description: The table of contents relative to the project root
+        default: 'README.md'
+        required: false
+        type: string
 
 jobs:
   adr-check-toc:
@@ -43,5 +48,5 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: cargo install adrs@$ADRS_VERSION
       - name: Verify that TOC is current and properly formatted
-        run: diff README.md <(~/.cargo/bin/adrs generate toc --ordered)
+        run: diff ${{ inputs.toc_file }} <(~/.cargo/bin/adrs generate toc --ordered)
     timeout-minutes: ${{ inputs.timeout_minutes }}
