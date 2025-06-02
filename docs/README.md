@@ -113,24 +113,16 @@ and the [release-please-action](https://github.com/googleapis/release-please-act
 These are local Actions that run for this repository. This workflow is not
 visible or usable outside of this repository.
 
-### markdownlint.yaml
-
-This workflow will run the
-[DavidAnson/markdownlint-cli2-action](https://github.com/DavidAnson/markdownlint-cli2-action)
-action to lint markdown files.
-
-#### markdownlint Inputs
-
-* `config_file`: The configuration file to use. Default: `.markdownlint-cli2.yaml`
-* `fix`: If set to true, fix any issues found. Default: `false`
-* `globs`: The glob to use to find all markdown files. Default: `**/*.md`
-* `separator`: The character used to separate globs. Default: `,`
-
 ### pre-commit.yaml
 
 This workflow runs the
 [pre-commmit action](https://github.com/pre-commit/action) with minimal options
 for configuration.
+
+### prettier.yaml
+
+This workflow will run [prettier](https://prettier.io/) to check formatting of
+markdown files. The only option passed is `--prose-wrap always`.
 
 ### puppet-build.yaml
 
