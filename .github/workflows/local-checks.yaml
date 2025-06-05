@@ -7,8 +7,8 @@ name: 'checks'
       - 'main'
 
 jobs:
-  markdownlint:
-    uses: ./.github/workflows/markdownlint.yaml
+  prettier:
+    uses: ./.github/workflows/prettier.yaml
   conventional-commit:
     uses: ./.github/workflows/conventional-commit.yaml
   pre-commit:
