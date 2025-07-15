@@ -69,21 +69,21 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Check terragrunt HCL
-        uses: gruntwork-io/terragrunt-action@v2
+        uses: gruntwork-io/terragrunt-action@v3
         with:
           tf_version: "${{ inputs.terraform_version }}"
           tg_version: "${{ inputs.terragrunt_version }}"
           tg_dir: ${{ inputs.working_directory }}
           tg_command: hclfmt --terragrunt-check --terragrunt-diff
       - name: Initialize Terraform
-        uses: gruntwork-io/terragrunt-action@v2
+        uses: gruntwork-io/terragrunt-action@v3
         with:
           tf_version: "${{ inputs.terraform_version }}"
           tg_version: "${{ inputs.terragrunt_version }}"
           tg_dir: "${{ inputs.working_directory }}/${{ inputs.terragrunt_directory }}"
           tg_command: init
       - name: Validate Terraform
-        uses: gruntwork-io/terragrunt-action@v2
+        uses: gruntwork-io/terragrunt-action@v3
         with:
           tf_version: "${{ inputs.terraform_version }}"
           tg_version: "${{ inputs.terragrunt_version }}"
