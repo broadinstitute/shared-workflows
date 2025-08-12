@@ -33,7 +33,7 @@ jobs:
       ADRS_VERSION: 0.3.0
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install rust
         uses: actions-rs/toolchain@v1
         with:
