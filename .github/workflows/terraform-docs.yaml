@@ -64,7 +64,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Render terraform docs inside the README.md
         uses: terraform-docs/gh-actions@v1.4.1
         with:
@@ -86,7 +86,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Render terraform docs inside the README.md
         uses: terraform-docs/gh-actions@v1.4.1
         with:

@@ -26,7 +26,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: 'Checkout repo'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@v5'
       - name: 'Run pre-commit'
         uses: 'pre-commit/action@v3.0.1'
     timeout-minutes: ${{ inputs.timeout_minutes }}
