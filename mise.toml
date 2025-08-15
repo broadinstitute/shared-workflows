@@ -1,2 +1,4 @@
 [tools]
+"cargo:adrs" = "latest"
 node = "latest"
+"npm:prettier" = "latest"

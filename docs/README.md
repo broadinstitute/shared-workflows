@@ -24,6 +24,12 @@ for the ADRs in the repository. The workflow assumes the output goes to the
 `README.md` in the same directory as the ADRs. This check makes sure PRs haven't
 forgotten to run this command as part of their commits.
 
+#### adr-check-toc Inputs
+
+- `adrs_version`: The version of ADRS to use. Default: `0.3.0`
+- `toc_file`: The path to the table of contents file. Default:
+  `docs/adr/README.md`
+
 ### ansible-lint.yaml
 
 This workflow will setup [Python][5] (`3.12`) and lint the repository using both
@@ -189,11 +195,11 @@ and unit tests will all happen using [PDK][9].
 - `puppet_versions`: The versions of [Puppet][7] to use in the unit tests,
   passed as a string in JSON format with `versions` as the key. Default:
   `'{ "versions": [ "7", "8" ] }'`
-    - **Note: Make sure to enclose the JSON string in single quotes!!**
+  - **Note: Make sure to enclose the JSON string in single quotes!!**
 - `ruby_versions`: The versions of [Ruby][8] to use in the unit tests, passed as
   a string in JSON format with `versions` as the key. Default:
   `'{ "versions": [ "3.1", "3.2" ] }'`
-    - **Note: Make sure to enclose the JSON string in single quotes!!**
+  - **Note: Make sure to enclose the JSON string in single quotes!!**
 
 ### python-deploy-to-pypi.yaml
 
@@ -231,12 +237,12 @@ by setting the `use_ruff` input to `true`.
   install. Default: `--no-root`
 - `python_version`: The version of [Python][5] to use. Default: `3.12`
 - `ruff_version`: The version of [Ruff](https://github.com/astral-sh/ruff) to
-  run. Default: `0.8.1`
+  run. Default: `0.12.9`
 - `use_pylama`: If true, use
   [pylama](https://github.com/AtomLinter/linter-pylama) to lint the repository.
-  Default: `true`
+  Default: `false`
 - `use_ruff`: If true, use [Ruff](https://github.com/astral-sh/ruff) to lint the
-  repository. Default: `false`
+  repository. Default: `true`
 
 ### python-make-ci.yaml
 
@@ -287,10 +293,10 @@ is used to install any [Python][5] dependencies.
 - `python_versions`: The versions of [Python][5] to use in the unit tests,
   passed as a string in JSON format with `versions` as the key. Default:
   `'{ "versions": [ "3.9", "3.10", "3.11", "3.12" ] }'`
-    - **Note: Make sure to enclose the JSON string in single quotes!!**
+  - **Note: Make sure to enclose the JSON string in single quotes!!**
 - `run_coverage`: Boolean to determine whether coverage should be run or not.
-  Default: `true`
-- `test_runner`: The runner used to run all the unit tests. Default: `green`
+  Default: `false`
+- `test_runner`: The runner used to run all the unit tests. Default: `pytest`
 - `test_targets`: A list of directories to target for testing. Runners should
   autodetect if left blank. Default: ``
 
@@ -366,11 +372,11 @@ and a `terraform validate`. If `use_terragrunt` is set to `true`, a
 #### terraform-validate Inputs
 
 - `terraform_version`: The version of Terraform to use when validating. Default:
-  `1.10.0`
+  `1.12.2`
 - `terragrunt_directory`: The environment directory from which Terragrunt should
   run. Default: `prod`
 - `terragrunt_version`: The version of Terragrunt to use when validating.
-  Default: `0.69.3`
+  Default: `0.85.0`
 - `use_terragrunt`: If set to true, use Terragrunt instead of Terraform.
   Default: `false`
 
