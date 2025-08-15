@@ -30,12 +30,12 @@ name: Python Checks
         required: false
         type: string
       run_coverage:
-        default: true
+        default: false
         description: Boolean to determine whether coverage should be run or not.
         required: false
         type: boolean
       test_runner:
-        default: "green"
+        default: "pytest"
         description: The runner used to run all the unit tests.
         required: false
         type: string

@@ -25,7 +25,7 @@ name: python-linting
         required: false
         type: string
       ruff_version:
-        default: "0.8.1"
+        default: "0.12.9"
         description: The version of ruff to run.
         required: false
         type: string
@@ -35,12 +35,12 @@ name: python-linting
         required: false
         type: number
       use_pylama:
-        default: true
+        default: false
         description: If true, use pylama to lint the repository.
         required: false
         type: boolean
       use_ruff:
-        default: false
+        default: true
         description: If true, use ruff to lint the repository.
         required: false
         type: boolean

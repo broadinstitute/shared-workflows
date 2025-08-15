@@ -8,7 +8,7 @@
         required: false
         type: string
       terraform_version:
-        default: "1.10.0"
+        default: "1.12.2"
         description: The version of Terraform to use when validating.
         required: false
         type: string
@@ -18,7 +18,7 @@
         required: false
         type: string
       terragrunt_version:
-        default: "0.69.3"
+        default: "0.85.0"
         description: The version of Terragrunt to use when validating.
         required: false
         type: string
@@ -71,14 +71,12 @@ jobs:
       - name: Check terragrunt HCL
         uses: gruntwork-io/terragrunt-action@v3
         with:
-          tf_version: "${{ inputs.terraform_version }}"
           tg_version: "${{ inputs.terragrunt_version }}"
           tg_dir: ${{ inputs.working_directory }}
           tg_command: hclfmt --terragrunt-check --terragrunt-diff
       - name: Initialize Terraform
         uses: gruntwork-io/terragrunt-action@v3
         with:
-          tf_version: "${{ inputs.terraform_version }}"
           tg_version: "${{ inputs.terragrunt_version }}"
           tg_dir:
             "${{ inputs.working_directory }}/${{ inputs.terragrunt_directory }}"
@@ -86,7 +84,6 @@ jobs:
       - name: Validate Terraform
         uses: gruntwork-io/terragrunt-action@v3
         with:
-          tf_version: "${{ inputs.terraform_version }}"
           tg_version: "${{ inputs.terragrunt_version }}"
           tg_dir:
             "${{ inputs.working_directory }}/${{ inputs.terragrunt_directory }}"
