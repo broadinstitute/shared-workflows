@@ -1,11 +1,11 @@
 ---
 name: pypi_deploy
 
-'on':
+"on":
   workflow_call:
     inputs:
       additional_packages:
-        default: ''
+        default: ""
         description: String of additional packages that should be installed.
         required: false
         type: string
@@ -15,12 +15,12 @@ name: pypi_deploy
         required: false
         type: string
       poetry_install_options:
-        default: '--no-root'
+        default: "--no-root"
         description: Extra options to pass to Poetry when doing an install.
         required: false
         type: string
       python_version:
-        default: '3.12'
+        default: "3.12"
         description: The version of Python to use for the run.
         required: false
         type: string
@@ -30,7 +30,7 @@ name: pypi_deploy
         required: false
         type: number
       working_directory:
-        default: '.'
+        default: "."
         description: The working directory where all jobs should be executed.
         required: false
         type: string

@@ -1,5 +1,5 @@
 ---
-'on':
+"on":
   workflow_call:
     inputs:
       jobs_run_on:
@@ -8,18 +8,18 @@
         required: false
         type: string
       puppet_package_name:
-        default: ''
+        default: ""
         description: The name of the PyPi package the repo will create.
         required: false
         type: string
       puppet_version:
-        default: '7'
+        default: "7"
         description: The version of Puppet to use in PDK
         required: false
         type: string
       ruby_version:
         description: The version of Ruby to use for the run.
-        default: '3.2'
+        default: "3.2"
         required: false
         type: string
       timeout_minutes:
@@ -29,7 +29,7 @@
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: '.'
+        default: "."
         required: false
         type: string
 
@@ -40,20 +40,22 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v5'
+      - name: "Checkout repo"
+        uses: "actions/checkout@v5"
       - name: "Set up Ruby ${{ inputs.ruby_version }}"
-        uses: 'ruby/setup-ruby@v1.255.0'
+        uses: "ruby/setup-ruby@v1.255.0"
         env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
+          BUNDLE_SILENCE_ROOT_WARNING: "1"
+          BUNDLE_WITH: "development"
           PUPPET_GEM_VERSION: "~> ${{ inputs.puppet_version }}"
         with:
           bundler-cache: true
           ruby-version: "${{ inputs.ruby_version }}"
-          rubygems: 'latest'
-      - name: 'Module build'
-        run: 'bundle exec pdk build --force'
-      - name: 'Test module install'
-        run: "bundle exec puppet module install pkg/${{ inputs.puppet_package_name }}-*.tar.gz"
+          rubygems: "latest"
+      - name: "Module build"
+        run: "bundle exec pdk build --force"
+      - name: "Test module install"
+        run:
+          "bundle exec puppet module install pkg/${{ inputs.puppet_package_name
+          }}-*.tar.gz"
     timeout-minutes: ${{ inputs.timeout_minutes }}

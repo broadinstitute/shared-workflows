@@ -1,9 +1,9 @@
 ---
-'on':
+"on":
   workflow_call:
     inputs:
       config_file:
-        default: '.terraform-docs.yml'
+        default: ".terraform-docs.yml"
         description: The path to the configuration file.
         required: false
         type: string
@@ -23,17 +23,17 @@
         required: false
         type: string
       output_file:
-        default: 'README.md'
+        default: "README.md"
         description: The path to the output file.
         required: false
         type: string
       output_method:
-        default: 'inject'
+        default: "inject"
         description: The method to use for output.
         required: false
         type: string
       terragrunt_directory:
-        default: 'prod'
+        default: "prod"
         description: The environment directory from which Terragrunt should run.
         required: false
         type: string
@@ -48,7 +48,7 @@
         required: false
         type: boolean
       working_directory:
-        default: '.'
+        default: "."
         description: |
           The working directory where all jobs should be executed.
           Comma separated list of directories to generate docs for.

@@ -1,10 +1,10 @@
 ---
-name: 'checks'
+name: "checks"
 
-'on':
+"on":
   pull_request:
     branches:
-      - 'main'
+      - "main"
 
 jobs:
   prettier:

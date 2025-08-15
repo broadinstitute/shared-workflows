@@ -1,5 +1,5 @@
 ---
-'on':
+"on":
   workflow_call:
     inputs:
       jobs_run_on:
@@ -24,7 +24,7 @@
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: '.'
+        default: "."
         required: false
         type: string
 
@@ -39,18 +39,19 @@ jobs:
         puppet: ${{ fromJSON(inputs.puppet_versions).versions }}
         ruby: ${{ fromJSON(inputs.ruby_versions).versions }}
     steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v5'
+      - name: "Checkout repo"
+        uses: "actions/checkout@v5"
       - name: "Set up Ruby ${{ matrix.ruby }}"
-        uses: 'ruby/setup-ruby@v1.255.0'
+        uses: "ruby/setup-ruby@v1.255.0"
         env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
+          BUNDLE_SILENCE_ROOT_WARNING: "1"
+          BUNDLE_WITH: "development"
           PUPPET_GEM_VERSION: "~> ${{ matrix.puppet }}"
         with:
           bundler-cache: true
           ruby-version: "${{ matrix.ruby }}"
-          rubygems: 'latest'
-      - name: 'Run unit tests'
-        run: 'bundle exec pdk test unit --puppet-version=${{ matrix.puppet }} -v'
+          rubygems: "latest"
+      - name: "Run unit tests"
+        run:
+          "bundle exec pdk test unit --puppet-version=${{ matrix.puppet }} -v"
     timeout-minutes: ${{ inputs.timeout_minutes }}

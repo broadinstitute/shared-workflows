@@ -1,5 +1,5 @@
 ---
-site_name: 'GitHub Actions for Broad Institute Shared Workflows'
+site_name: "GitHub Actions for Broad Institute Shared Workflows"
 
 nav:
   - Home: README.md
