@@ -1,5 +1,5 @@
 ---
-'on':
+"on":
   workflow_call:
     inputs:
       jobs_run_on:
@@ -28,18 +28,19 @@
         required: false
         type: number
       trivy_skip_files:
-        description: A comma-separated list of files Trivy should ignore (optional).
-        default: ''
+        description:
+          A comma-separated list of files Trivy should ignore (optional).
+        default: ""
         required: false
         type: string
       trivy_version:
         description: The version of Trivy to run.
-        default: 'latest'
+        default: "latest"
         required: false
         type: string
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: '.'
+        default: "."
         required: false
         type: string
     secrets:
@@ -53,25 +54,25 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v5'
-      - name: 'Run Checkov'
-        id: 'checkov'
+      - name: "Checkout repo"
+        uses: "actions/checkout@v5"
+      - name: "Run Checkov"
+        id: "checkov"
         if: ${{ inputs.run_checkov == true }}
-        uses: 'bridgecrewio/checkov-action@v12'
-      - name: 'Run tfsec'
-        id: 'tfsec'
+        uses: "bridgecrewio/checkov-action@v12"
+      - name: "Run tfsec"
+        id: "tfsec"
         if: ${{ inputs.run_tfsec == true }}
-        uses: 'aquasecurity/tfsec-pr-commenter-action@v1.3.1'
+        uses: "aquasecurity/tfsec-pr-commenter-action@v1.3.1"
         with:
           github_token: ${{ secrets.wf_github_token }}
       - name: Run Trivy vulnerability scanner in IaC mode
         if: ${{ inputs.run_trivy == true }}
-        uses: 'aquasecurity/trivy-action@0.32.0'
+        uses: "aquasecurity/trivy-action@0.32.0"
         with:
-          exit-code: '1'
-          scan-type: 'config'
-          severity: 'CRITICAL,HIGH'
+          exit-code: "1"
+          scan-type: "config"
+          severity: "CRITICAL,HIGH"
           skip-files: ${{ inputs.trivy_skip_files }}
           version: ${{ inputs.trivy_version }}
     timeout-minutes: ${{ inputs.timeout_minutes }}

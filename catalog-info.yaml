@@ -3,7 +3,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: shared-workflows
-  description: GitHub Action workflows that can be shared by multiple repositories
+  description:
+    GitHub Action workflows that can be shared by multiple repositories
   tags:
     - bits
     - bits-tools

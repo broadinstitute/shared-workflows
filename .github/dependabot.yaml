@@ -4,11 +4,11 @@ updates:
   - package-ecosystem: github-actions
     commit-message:
       prefix: feat
-    directory: '/'
+    directory: "/"
     groups:
       actions:
         patterns:
-          - '*'
+          - "*"
     schedule:
       # Check for updates to GitHub Actions every week
       interval: weekly

@@ -1,11 +1,11 @@
 ---
 name: python-linting
 
-'on':
+"on":
   workflow_call:
     inputs:
       additional_packages:
-        default: ''
+        default: ""
         description: String of additional packages that should be installed.
         required: false
         type: string
@@ -16,7 +16,7 @@ name: python-linting
         type: string
       python_version:
         description: The version of Python to use for the run.
-        default: '3.12'
+        default: "3.12"
         required: false
         type: string
       timeout_minutes:
@@ -26,7 +26,7 @@ name: python-linting
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: '.'
+        default: "."
         required: false
         type: string
 

@@ -1,5 +1,5 @@
 ---
-'on':
+"on":
   workflow_call:
     inputs:
       jobs_run_on:
@@ -14,7 +14,7 @@
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: '.'
+        default: "."
         required: false
         type: string
       validate_pr_title:
@@ -39,7 +39,9 @@ jobs:
       run:
         working-directory: ${{ inputs.working_directory }}
     runs-on: ${{ inputs.jobs_run_on }}
-    if: ${{ github.actor != 'dependabot[bot]'  || github.actor != 'pre-commit-ci[bot]'}}
+    if:
+      ${{ github.actor != 'dependabot[bot]'  || github.actor !=
+      'pre-commit-ci[bot]'}}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -68,17 +70,27 @@ jobs:
           EOF
 
       - name: Validate PR Title
-        if: github.event_name == 'pull_request' && inputs.validate_pr_title == true
-        run: echo "${{ github.event.pull_request.title }}" | npx commitlint --verbose
+        if:
+          github.event_name == 'pull_request' && inputs.validate_pr_title ==
+          true
+        run:
+          echo "${{ github.event.pull_request.title }}" | npx commitlint
+          --verbose
 
       - name: Validate current commit (last commit) with commitlint
-        if: github.event_name == 'push' && inputs.validate_current_commit == true
+        if:
+          github.event_name == 'push' && inputs.validate_current_commit == true
         run: npx commitlint --last --verbose
 
       - name: Validate PR commits with commitlint
-        if: github.event_name == 'pull_request' && inputs.validate_pr_commits == true
+        if:
+          github.event_name == 'pull_request' && inputs.validate_pr_commits ==
+          true
         # yamllint disable-line rule:line-length
-        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        run:
+          npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{
+          github.event.pull_request.commits }} --to ${{
+          github.event.pull_request.head.sha }} --verbose
     timeout-minutes: ${{ inputs.timeout_minutes }}
 
   label:

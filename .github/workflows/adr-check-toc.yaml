@@ -1,5 +1,5 @@
 ---
-'on':
+"on":
   workflow_call:
     inputs:
       adrs_version:
@@ -42,5 +42,7 @@ jobs:
       - name: Install adrs
         run: cargo install adrs@${{ inputs.adrs_version }}
       - name: Verify that TOC is current and properly formatted
-        run: diff ${{ inputs.toc_file }} <(~/.cargo/bin/adrs generate toc --ordered)
+        run:
+          diff ${{ inputs.toc_file }} <(~/.cargo/bin/adrs generate toc
+          --ordered)
     timeout-minutes: ${{ inputs.timeout_minutes }}
