@@ -375,8 +375,6 @@ and a `terraform validate`. If `use_terragrunt` is set to `true`, a
   `1.12.2`
 - `terragrunt_directory`: The environment directory from which Terragrunt should
   run. Default: `prod`
-- `terragrunt_version`: The version of Terragrunt to use when validating.
-  Default: `0.85.0`
 - `use_terragrunt`: If set to true, use Terragrunt instead of Terraform.
   Default: `false`
 
