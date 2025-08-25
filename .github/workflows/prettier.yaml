@@ -22,10 +22,12 @@ jobs:
     defaults:
       run:
         working-directory: "${{ inputs.working_directory }}"
-    runs-on: "${{ inputs.jobs_run_on }}"
-    timeout-minutes: "${{ inputs.timeout_minutes }}"
     env:
       PRETTIER_VERSION: "3"
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: "${{ inputs.jobs_run_on }}"
     steps:
       - name: "Checkout repo"
         uses: "actions/checkout@v5"
@@ -51,3 +53,4 @@ jobs:
       - name: "Check all files with prettier"
         run: >-
           prettier --prose-wrap always --check **/*.md
+    timeout-minutes: "${{ inputs.timeout_minutes }}"
