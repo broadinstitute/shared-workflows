@@ -51,7 +51,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           close-issue-message: |
             This issue was closed because it has been stalled for 5 days with no activity.
