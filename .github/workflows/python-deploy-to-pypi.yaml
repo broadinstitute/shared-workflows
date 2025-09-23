@@ -51,6 +51,9 @@ jobs:
       run:
         working-directory: ${{ inputs.working_directory }}
     name: Build distribution 📦
+    permissions:
+      contents: read
+      pull-requests: read
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Install additional packages
