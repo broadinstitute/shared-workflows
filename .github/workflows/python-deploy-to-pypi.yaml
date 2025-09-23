@@ -10,9 +10,9 @@ name: pypi_deploy
         required: false
         type: string
       environment_name:
-        default: ""
+        default: "pypi"
         description: The name of the environment used to deploy to PyPi
-        required: true
+        required: false
         type: string
       jobs_run_on:
         default: ubuntu-latest
