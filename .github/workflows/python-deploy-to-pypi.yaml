@@ -9,10 +9,20 @@ name: pypi_deploy
         description: String of additional packages that should be installed.
         required: false
         type: string
+      environment_name:
+        default: "pypi"
+        description: The name of the environment used to deploy to PyPi
+        required: false
+        type: string
       jobs_run_on:
         default: ubuntu-latest
         description: The runner group on which jobs will run.
         required: false
+        type: string
+      package_name:
+        default: ""
+        description: The name of the package deploying to PyPi
+        required: true
         type: string
       poetry_install_options:
         default: "--no-root"
@@ -34,16 +44,13 @@ name: pypi_deploy
         description: The working directory where all jobs should be executed.
         required: false
         type: string
-    secrets:
-      pypi_token:
-        description: The PyPi token to use to deploy.
-        required: true
 
 jobs:
-  pypi_deploy:
+  build:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
+    name: Build distribution 📦
     permissions:
       contents: read
       pull-requests: read
@@ -54,8 +61,9 @@ jobs:
         run: |
           sudo apt-get update -yq
           sudo apt-get install -y ${{ inputs.additional_packages }}
-      - name: Checkout repo
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Install poetry
         run: pipx install poetry
       - name: "Set up Python ${{ inputs.python_version }}"
@@ -67,12 +75,35 @@ jobs:
         run: poetry config virtualenvs.in-project true
       - name: Install dependencies
         run: poetry install ${{ inputs.poetry_install_options }}
-      - name: Setup PyPi credential
-        env:
-          PYPI_TOKEN: ${{ secrets.pypi_token }}
-        run: poetry config pypi-token.pypi "$PYPI_TOKEN"
       - name: Package build
         run: poetry build
-      - name: Publish package to PyPi
-        run: poetry publish
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+    timeout-minutes: ${{ inputs.timeout_minutes }}
+  pypi_deploy:
+    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    environment:
+      name: ${{ inputs.environment_name }}
+      url: https://pypi.org/p/${{ inputs.package_name }}
+    needs:
+      - build
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: read
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v5
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
     timeout-minutes: ${{ inputs.timeout_minutes }}

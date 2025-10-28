@@ -9,10 +9,20 @@ name: pypi_test_deploy
         description: String of additional packages that should be installed.
         required: false
         type: string
+      environment_name:
+        default: "testpypi"
+        description: The name of the environment used to deploy to Test PyPi
+        required: false
+        type: string
       jobs_run_on:
         default: ubuntu-latest
         description: The runner group on which jobs will run.
         required: false
+        type: string
+      package_name:
+        default: ""
+        description: The name of the package deploying to Test PyPi
+        required: true
         type: string
       poetry_install_options:
         default: "--no-root"
@@ -34,16 +44,13 @@ name: pypi_test_deploy
         default: "."
         required: false
         type: string
-    secrets:
-      pypi_test_token:
-        description: The PyPi for test.pypi.org token to use to deploy.
-        required: true
 
 jobs:
-  pypi_test_deploy:
+  build:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
+    name: Build distribution 📦
     permissions:
       contents: read
       pull-requests: read
@@ -54,8 +61,9 @@ jobs:
         run: |
           sudo apt-get update -yq
           sudo apt-get install -y ${{ inputs.additional_packages }}
-      - name: Checkout repo
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Install poetry
         run: pipx install poetry
       - name: "Set up Python ${{ inputs.python_version }}"
@@ -67,14 +75,37 @@ jobs:
         run: poetry config virtualenvs.in-project true
       - name: Install dependencies
         run: poetry install ${{ inputs.poetry_install_options }}
-      - name: Setup PyPi credential
-        env:
-          PYPI_TOKEN: ${{ secrets.pypi_test_token }}
-        run: |
-          poetry config repositories.testpypi https://test.pypi.org/legacy/
-          poetry config pypi-token.testpypi "$PYPI_TOKEN"
       - name: Package build
         run: poetry build
-      - name: Publish package to PyPi
-        run: poetry publish --dry-run -r testpypi
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-test-package-distributions
+          path: dist/
+    timeout-minutes: ${{ inputs.timeout_minutes }}
+  publish-to-testpypi:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/${{ inputs.package_name }}
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    needs:
+      - build
+    permissions:
+      contents: read
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+      pull-requests: read
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v4
+        with:
+          name: python-test-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
     timeout-minutes: ${{ inputs.timeout_minutes }}
