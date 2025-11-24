@@ -39,7 +39,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
       - name: Install adrs
