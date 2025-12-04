@@ -46,10 +46,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ inputs.terraform_version }}
+      - name: Setup tfenv
+        uses: rhythmictech/actions-setup-tfenv@v0.1.2
       - name: Initialize Terraform
         run: terraform init -reconfigure -backend=false
       - name: Validate Terraform
