@@ -28,7 +28,7 @@
         required: false
         type: number
       trivy_ignore_files:
-        description: A comma-separated list of trivyignore configs for ignoring certain vulnerabilities (optional) (ex: .trivyignore).
+        description: Comma separated list of trivyignore config files (optional)
         default: ""
         required: false
         type: string
