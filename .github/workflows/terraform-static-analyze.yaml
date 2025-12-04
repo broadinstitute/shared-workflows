@@ -27,6 +27,12 @@
         default: 5
         required: false
         type: number
+      trivy_ignore_files:
+        description:
+          A comma-separated list of trivyignore configs for ignoring certain vulnerabilities (optional) (ex: .trivyignore).
+        default: ""
+        required: false
+        type: string
       trivy_skip_files:
         description:
           A comma-separated list of files Trivy should ignore (optional).
@@ -77,5 +83,6 @@ jobs:
           scan-type: "config"
           severity: "CRITICAL,HIGH"
           skip-files: ${{ inputs.trivy_skip_files }}
+          trivyignores: ${{ inputs.trivy_ignore_files }}
           version: ${{ inputs.trivy_version }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
