@@ -58,7 +58,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: "Checkout repo"
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
       - name: "Run Checkov"
         id: "checkov"
         if: ${{ inputs.run_checkov == true }}
