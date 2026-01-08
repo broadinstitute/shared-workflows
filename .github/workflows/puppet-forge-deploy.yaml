@@ -41,22 +41,24 @@ jobs:
       pull-requests: read
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: "Checkout repo"
-        uses: "actions/checkout@v6"
-      - name: "Set up Ruby ${{ inputs.ruby_version }}"
-        uses: "ruby/setup-ruby@v1.279.0"
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Set up Ruby ${{ inputs.ruby_version }}
+        uses: ruby/setup-ruby@v1.279.0
         env:
           BUNDLE_SILENCE_ROOT_WARNING: "1"
-          BUNDLE_WITH: "development"
+          BUNDLE_WITH: development
           PUPPET_GEM_VERSION: "~> ${{ inputs.puppet_version }}"
         with:
           bundler-cache: true
           ruby-version: "${{ inputs.ruby_version }}"
-          rubygems: "latest"
-      - name: "Module build"
-        run: "bundle exec pdk build --force"
-      - name: "Publish package to Puppet Forge"
+          rubygems: latest
+      - name: Install PDK
+        run: gem install pdk
+      - name: Module build
+        run: pdk build --force
+      - name: Publish package to Puppet Forge
         env:
           PDK_FORGE_TOKEN: ${{ secrets.forge_token }}
-        run: "bundle exec pdk release publish"
+        run: pdk release publish
     timeout-minutes: ${{ inputs.timeout_minutes }}

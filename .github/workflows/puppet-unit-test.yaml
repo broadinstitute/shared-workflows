@@ -42,19 +42,20 @@ jobs:
         puppet: ${{ fromJSON(inputs.puppet_versions).versions }}
         ruby: ${{ fromJSON(inputs.ruby_versions).versions }}
     steps:
-      - name: "Checkout repo"
-        uses: "actions/checkout@v6"
-      - name: "Set up Ruby ${{ matrix.ruby }}"
-        uses: "ruby/setup-ruby@v1.279.0"
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1.279.0
         env:
           BUNDLE_SILENCE_ROOT_WARNING: "1"
-          BUNDLE_WITH: "development"
+          BUNDLE_WITH: development
           PUPPET_GEM_VERSION: "~> ${{ matrix.puppet }}"
         with:
           bundler-cache: true
           ruby-version: "${{ matrix.ruby }}"
-          rubygems: "latest"
-      - name: "Run unit tests"
-        run:
-          "bundle exec pdk test unit --puppet-version=${{ matrix.puppet }} -v"
+          rubygems: latest
+      - name: Install PDK
+        run: gem install pdk
+      - name: Run unit tests
+        run: pdk test unit --puppet-version=${{ matrix.puppet }} -v
     timeout-minutes: ${{ inputs.timeout_minutes }}
