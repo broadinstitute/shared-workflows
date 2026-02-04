@@ -1,5 +1,5 @@
 ---
-name: "checks"
+name: checks
 permissions:
   contents: read
   pull-requests: read
@@ -7,11 +7,11 @@ permissions:
 "on":
   pull_request:
     branches:
-      - "main"
+      - main
 
 jobs:
-  prettier:
-    uses: ./.github/workflows/prettier.yaml
+  adrs-check-toc:
+    uses: ./.github/workflows/adr-check-toc.yaml
   conventional-commit:
     permissions:
       contents: read
@@ -19,3 +19,5 @@ jobs:
     uses: ./.github/workflows/conventional-commit.yaml
   pre-commit:
     uses: ./.github/workflows/pre-commit.yaml
+  prettier:
+    uses: ./.github/workflows/prettier.yaml

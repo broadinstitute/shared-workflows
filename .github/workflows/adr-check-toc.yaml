@@ -3,7 +3,7 @@
   workflow_call:
     inputs:
       adrs_version:
-        default: "0.3.0"
+        default: "0.7.2"
         description: The version of ADRS that will run.
         required: false
         type: string

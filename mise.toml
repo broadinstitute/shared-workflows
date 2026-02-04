@@ -1,4 +1,4 @@
 [tools]
-"cargo:adrs" = "latest"
+"cargo:adrs" = "0.7.2"
 node = "latest"
 "npm:prettier" = "latest"
