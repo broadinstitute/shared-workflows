@@ -35,7 +35,7 @@
         type: string
       trivy_version:
         description: The version of Trivy to run.
-        default: "latest"
+        default: "v0.69.2"
         required: false
         type: string
       working_directory:
@@ -57,25 +57,31 @@ jobs:
       pull-requests: read
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: "Checkout repo"
-        uses: "actions/checkout@v6"
-      - name: "Run Checkov"
-        id: "checkov"
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Run Checkov
+        id: checkov
         if: ${{ inputs.run_checkov == true }}
-        uses: "bridgecrewio/checkov-action@v12"
-      - name: "Run tfsec"
-        id: "tfsec"
+        uses: bridgecrewio/checkov-action@v12
+      - name: Run tfsec
+        id: tfsec
         if: ${{ inputs.run_tfsec == true }}
-        uses: "aquasecurity/tfsec-pr-commenter-action@v1.3.1"
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
           github_token: ${{ secrets.wf_github_token }}
+      - name: Set up Trivy
+        if: ${{ inputs.run_trivy == true }}
+        uses: aquasecurity/setup-trivy@v0.2.5
+        with:
+          version: ${{ inputs.trivy_version }}
       - name: Run Trivy vulnerability scanner in IaC mode
         if: ${{ inputs.run_trivy == true }}
-        uses: "aquasecurity/trivy-action@0.34.0"
+        uses: aquasecurity/trivy-action@0.34.2
         with:
           exit-code: "1"
-          scan-type: "config"
-          severity: "CRITICAL,HIGH"
+          scan-type: config
+          severity: CRITICAL,HIGH
           skip-files: ${{ inputs.trivy_skip_files }}
+          skip-setup-trivy: true
           version: ${{ inputs.trivy_version }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
