@@ -71,7 +71,7 @@ jobs:
           github_token: ${{ secrets.wf_github_token }}
       - name: Set up Trivy
         if: ${{ inputs.run_trivy == true }}
-        uses: aquasecurity/setup-trivy@v0.2.5
+        uses: aquasecurity/setup-trivy@v0.2.6
         with:
           version: ${{ inputs.trivy_version }}
       - name: Run Trivy vulnerability scanner in IaC mode
