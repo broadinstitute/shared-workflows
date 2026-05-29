@@ -3,54 +3,54 @@
   workflow_call:
     inputs:
       jobs_run_on:
-        default: "ubuntu-latest"
-        description: "The runner group on which jobs will run."
+        default: ubuntu-latest
+        description: The runner group on which jobs will run
         required: false
-        type: "string"
+        type: string
       timeout_minutes:
-        description: "The maximum time (in minutes) for a job to run."
+        description: The maximum time (in minutes) for a job to run
         default: 5
         required: false
-        type: "number"
+        type: number
       working_directory:
-        description: "The working directory where all jobs should be executed."
-        default: "."
+        description: The working directory where all jobs should be executed.
+        default: .
         required: false
-        type: "string"
+        type: string
 jobs:
   prettier:
     defaults:
       run:
-        working-directory: "${{ inputs.working_directory }}"
+        working-directory: ${{ inputs.working_directory }}
     env:
       PRETTIER_VERSION: "3"
     permissions:
       contents: read
       pull-requests: read
-    runs-on: "${{ inputs.jobs_run_on }}"
+    runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: "Checkout repo"
-        uses: "actions/checkout@v6"
-      - name: "Set up Node.js"
-        uses: "actions/setup-node@v6"
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: "22.x"
-      - name: "Get yarn cache directory"
-        id: "cache-dir"
+          node-version: 22.x
+      - name: Get yarn cache directory
+        id: cache-dir
         run: >-
           echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-      - uses: "actions/cache@v5"
-        id: "cache"
+      - uses: actions/cache@v5
+        id: cache
         with:
-          path: "${{ steps.cache-dir.outputs.dir }}"
+          path: ${{ steps.cache-dir.outputs.dir }}
           key: "${{ runner.os }}-prettier@${{ env.PRETTIER_VERSION }}"
-      - name: "Install prettier"
+      - name: Install prettier
         run: >-
           yarn add "prettier@${{ env.PRETTIER_VERSION }}"
-      - name: "Put node executables in the system PATH"
+      - name: Put node executables in the system PATH
         run: >-
           echo -n "$(yarn bin)" >> $GITHUB_PATH
-      - name: "Check all files with prettier"
+      - name: Check all files with prettier
         run: >-
           prettier --prose-wrap always --check **/*.md
-    timeout-minutes: "${{ inputs.timeout_minutes }}"
+    timeout-minutes: ${{ inputs.timeout_minutes }}

@@ -8,7 +8,7 @@
         required: false
         type: string
       tflint_config_path:
-        default: ".tflint.hcl"
+        default: .tflint.hcl
         description: The relative path to the TFlint configuration file.
         required: false
         type: string
@@ -19,7 +19,7 @@
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: "."
+        default: .
         required: false
         type: string
 
@@ -33,10 +33,10 @@ jobs:
       pull-requests: read
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
-      - name: "Checkout repo"
-        uses: "actions/checkout@v6"
-      - name: "Setup TFLint"
-        uses: "terraform-linters/setup-tflint@v6"
-      - name: "Run TFLint"
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v6
+      - name: Run TFLint
         run: tflint -c ${{ inputs.tflint_config_path }}
     timeout-minutes: ${{ inputs.timeout_minutes }}

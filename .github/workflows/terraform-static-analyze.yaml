@@ -35,12 +35,12 @@
         type: string
       trivy_version:
         description: The version of Trivy to run.
-        default: "v0.69.2"
+        default: v0.69.2
         required: false
         type: string
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: "."
+        default: .
         required: false
         type: string
     secrets:

@@ -15,7 +15,7 @@ name: python-linting
         required: false
         type: string
       poetry_install_options:
-        default: "--no-root"
+        default: --no-root
         description: Extra options to pass to Poetry when doing an install.
         required: false
         type: string
@@ -25,7 +25,7 @@ name: python-linting
         required: false
         type: string
       ruff_version:
-        default: "0.12.9"
+        default: "0.15.15"
         description: The version of ruff to run.
         required: false
         type: string
@@ -45,7 +45,7 @@ name: python-linting
         required: false
         type: boolean
       working_directory:
-        default: "."
+        default: .
         description: The working directory where all jobs should be executed.
         required: false
         type: string

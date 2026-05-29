@@ -26,7 +26,7 @@ forgotten to run this command as part of their commits.
 
 #### adr-check-toc Inputs
 
-- `adrs_version`: The version of ADRS to use. Default: `0.3.0`
+- `adrs_version`: The version of ADRS to use. Default: `0.7.3`
 - `toc_file`: The path to the table of contents file. Default:
   `docs/adr/README.md`
 
@@ -223,11 +223,9 @@ This workflow will setup [Python][5] (`3.12`) and do a build and deploy of the
 
 This workflow will setup [Python][5] (`3.12`) and lint the repository.
 [Poetry][3] is used to install any [Python][5] dependencies. By default the
-linters run are [yamllint][13], and
-[pylama](https://github.com/AtomLinter/linter-pylama). As of August 2023,
-[pylama](https://github.com/AtomLinter/linter-pylama) has been deprecated, so
-you can run [Ruff](https://github.com/astral-sh/ruff) as the [Python][5] linter
-by setting the `use_ruff` input to `true`.
+linters run are [yamllint][13], and [Ruff][14]. As of August 2023, [pylama][15]
+has been deprecated, so you can run only run [pylama][15] as the [Python][5]
+linter by setting the `use_pylama` input to `true`.
 
 #### python-lint Inputs
 
@@ -237,7 +235,7 @@ by setting the `use_ruff` input to `true`.
   install. Default: `--no-root`
 - `python_version`: The version of [Python][5] to use. Default: `3.12`
 - `ruff_version`: The version of [Ruff](https://github.com/astral-sh/ruff) to
-  run. Default: `0.12.9`
+  run. Default: `0.15.15`
 - `use_pylama`: If true, use
   [pylama](https://github.com/AtomLinter/linter-pylama) to lint the repository.
   Default: `false`
@@ -308,7 +306,7 @@ generate the [Terraform][10] documentation and store it in the README.md.
 #### terraform-docs Inputs
 
 - `config_file`: The path to the configuration file. Default:
-  `.terraform-docs.yml`
+  `.terraform-docs.yaml`
 - `git_push`: If set to true, push the changes to the repository. Default:
   `false`
 - `output_file`: The path to the output file. Default: `README.md`
@@ -402,3 +400,5 @@ gh release create v2.7.0 --draft --generate-notes --title v2.7.0
 [11]: https://terragrunt.gruntwork.io/ "Terragrunt"
 [12]: https://forge.puppet.com/ "Puppet Forge"
 [13]: https://github.com/adrienverge/yamllint "yamllint"
+[14]: https://github.com/astral-sh/ruff "Ruff"
+[15]: https://github.com/AtomLinter/linter-pylama "pylama"
