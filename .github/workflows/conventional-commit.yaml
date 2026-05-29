@@ -12,16 +12,6 @@
         default: 5
         required: false
         type: number
-      working_directory:
-        description: The working directory where all jobs should be executed.
-        default: "."
-        required: false
-        type: string
-      validate_pr_title:
-        description: Validate PR title
-        default: true
-        required: false
-        type: boolean
       validate_current_commit:
         description: Validate current commit (last commit)
         default: false
@@ -32,6 +22,16 @@
         default: false
         required: false
         type: boolean
+      validate_pr_title:
+        description: Validate PR title
+        default: true
+        required: false
+        type: boolean
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: .
+        required: false
+        type: string
 
 jobs:
   conventional-commits:

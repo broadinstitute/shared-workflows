@@ -24,7 +24,7 @@
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: "."
+        default: .
         required: false
         type: string
     secrets:

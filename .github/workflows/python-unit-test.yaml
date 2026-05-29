@@ -15,7 +15,7 @@ name: Python Checks
         required: false
         type: string
       poetry_install_options:
-        default: "--no-root"
+        default: --no-root
         description: Extra options to pass to Poetry when doing an install.
         required: false
         type: string
@@ -35,7 +35,7 @@ name: Python Checks
         required: false
         type: boolean
       test_runner:
-        default: "pytest"
+        default: pytest
         description: The runner used to run all the unit tests.
         required: false
         type: string
@@ -51,7 +51,7 @@ name: Python Checks
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: "."
+        default: .
         required: false
         type: string
 

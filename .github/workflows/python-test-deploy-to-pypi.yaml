@@ -15,7 +15,7 @@ name: pypi_test_deploy
         required: false
         type: string
       poetry_install_options:
-        default: "--no-root"
+        default: --no-root
         description: Extra options to pass to Poetry when doing an install.
         required: false
         type: string
@@ -31,7 +31,7 @@ name: pypi_test_deploy
         type: number
       working_directory:
         description: The working directory where all jobs should be executed.
-        default: "."
+        default: .
         required: false
         type: string
     secrets:
