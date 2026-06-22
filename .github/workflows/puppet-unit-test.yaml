@@ -43,9 +43,9 @@ jobs:
         ruby: ${{ fromJSON(inputs.ruby_versions).versions }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up Ruby ${{ matrix.ruby }}
-        uses: ruby/setup-ruby@v1.311.0
+        uses: ruby/setup-ruby@v1.314.0
         env:
           BUNDLE_SILENCE_ROOT_WARNING: "1"
           BUNDLE_WITH: development
