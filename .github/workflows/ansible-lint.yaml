@@ -41,7 +41,7 @@ jobs:
     runs-on: ${{ inputs.jobs_run_on }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install additional packages
         if: ${{ inputs.additional_packages != '' }}
         run: |
