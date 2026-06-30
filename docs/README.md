@@ -138,7 +138,12 @@ for configuration.
 ### prettier.yaml
 
 This workflow will run [prettier](https://prettier.io/) to check formatting of
-markdown files. The only option passed is `--prose-wrap always`.
+markdown files.
+
+#### prettier Inputs
+
+- `check_files_pattern`: The glob pattern for files to check with
+  [Prettier](https://prettier.io/), Default: `.`
 
 ### puppet-build.yaml
 

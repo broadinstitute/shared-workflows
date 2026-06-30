@@ -2,6 +2,11 @@
 "on":
   workflow_call:
     inputs:
+      check_files_pattern:
+        default: .
+        description: The glob pattern for files to check with Prettier
+        required: false
+        type: string
       jobs_run_on:
         default: ubuntu-latest
         description: The runner group on which jobs will run
@@ -34,7 +39,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22.x
+          node-version: 26.x
       - name: Get yarn cache directory
         id: cache-dir
         run: >-
@@ -52,5 +57,6 @@ jobs:
           echo -n "$(yarn bin)" >> $GITHUB_PATH
       - name: Check all files with prettier
         run: >-
-          prettier --prose-wrap always --check **/*.md
+          prettier --check ${{ inputs.check_files_pattern }}
+        working-directory: ${{ inputs.working_directory }}
     timeout-minutes: ${{ inputs.timeout_minutes }}
