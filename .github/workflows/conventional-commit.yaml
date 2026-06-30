@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
-          node-version: 23
+          node-version: 26.x
       - name: Install commitlint
         run: |
           npm install --save-dev @commitlint/{cli,config-conventional}
