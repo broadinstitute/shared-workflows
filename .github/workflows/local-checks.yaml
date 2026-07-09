@@ -17,7 +17,7 @@ jobs:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/conventional-commit.yaml
-  pre-commit:
-    uses: ./.github/workflows/pre-commit.yaml
+  prek:
+    uses: ./.github/workflows/prek.yaml
   prettier:
     uses: ./.github/workflows/prettier.yaml
