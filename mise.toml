@@ -3,7 +3,8 @@ description = "Generate a table of contents and update the ADR README.md file"
 run = "adrs generate toc --ordered > docs/adr/README.md | prettier -w docs/adr/README.md"
 
 [tools]
+"aqua:j178/prek" = "latest"
 "github:joshrotenberg/adrs" = "latest"
-node = "latest"
 "npm:prettier" = "latest"
+node = "latest"
 yamllint = "latest"

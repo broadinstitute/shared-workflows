@@ -135,6 +135,15 @@ This workflow runs the
 [pre-commmit action](https://github.com/pre-commit/action) with minimal options
 for configuration.
 
+### prek.yaml
+
+This workflow runs the [prek action](https://github.com/j178/prek-action) with
+minimal options for configuration.
+
+#### prek Inputs
+
+- `verbose`: Run `prek` in verbose mode, Default: `false`
+
 ### prettier.yaml
 
 This workflow will run [prettier](https://prettier.io/) to check formatting of
@@ -380,6 +389,15 @@ and a `terraform validate`. If `use_terragrunt` is set to `true`, a
   run. Default: `prod`
 - `use_terragrunt`: If set to true, use Terragrunt instead of Terraform.
   Default: `false`
+
+### yamllint.yaml
+
+This workflow runs [yamllint](https://github.com/adrienverge/yamllint) with
+minimal options for configuration.
+
+#### yamllint Inputs
+
+- `extra_arguments`: Extra arguments to pass to `yamllint`, Default: ``
 
 ## Releases
 

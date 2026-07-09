@@ -1,0 +1,42 @@
+---
+"on":
+  workflow_call:
+    inputs:
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 5
+        required: false
+        type: number
+      verbose:
+        description: Whether to run prek in verbose mode.
+        default: false
+        required: false
+        type: boolean
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: .
+        required: false
+        type: string
+
+jobs:
+  prek:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ${{ inputs.jobs_run_on }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+      - name: Run prek
+        uses: j178/prek-action@v2
+        with:
+          show-verbose-logs: ${{ inputs.verbose }}
+    timeout-minutes: ${{ inputs.timeout_minutes }}
