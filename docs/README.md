@@ -77,14 +77,16 @@ jobs:
 
 ### conventional-commit.yaml
 
-This workflow will run the[commitlint](https://commitlint.js.org/) By default it
+This workflow will run [commitlint](https://commitlint.js.org/). By default it
 only checks that PR titles follow [Conventional Commits][1]. In addition the
 'subject-case' and 'body-max-line-length' checks are disabled.
+
+#### conventional-commit Inputs
 
 - `validate_pr_title`: Validate PR title. Default: true
 - `validate_current_commit`: Validate current commit (last commit). Default:
   false
-- validate_pr_commits: Validate PR commits. Default: false
+- `validate_pr_commits`: Validate PR commits. Default: false
 
 #### Conventional Release-Labels
 
@@ -124,10 +126,64 @@ More info on this can be found in the
 and the
 [release-please-action](https://github.com/googleapis/release-please-action)
 
+### gatekeeper-policies.yaml
+
+This workflow runs
+[gator](https://open-policy-agent.github.io/gatekeeper/website/docs/gator/)
+`test` against a repository's
+[Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/)
+`ConstraintTemplate` and `Constraint` manifests (using the `gatekeeper-policies`
+image built from the
+[kubernetes-configs](https://github.com/broadinstitute/kubernetes-configs)
+repository), posts the results as a comment on the pull request, and fails the
+check if any violations with `enforcementAction: deny` are found.
+
+#### gatekeeper-policies Inputs
+
+- `environment`: The environment name being used. Required
+- `gke_cluster_name`: The GKE cluster to fetch ConstraintTemplates from.
+  Default: `gke-autopilot-01-prod`
+- `gke_location`: The location (region/zone) of the GKE cluster. Default:
+  `us-east4`
+- `gke_project`: The GCP project the GKE cluster lives in. Default:
+  `bits-gke-clusters`
+- `manifests_directory`: The directory where Kubernetes manifests are located.
+  Default: `deployment/app`
+- `pr_number`: The pull request number to post a comment on. Required
+- `validate-policies`: Whether to validate Gatekeeper policies. Default: `true`
+
+#### gatekeeper-policies example
+
+This is an example of how to use the `gatekeeper-policies` workflow in a GitHub
+Actions workflow. This block is placed directly after the "hydrate" job, and
+before the "deploy" job. Set the `validate-policies` input to `true` to enable
+policy validation, typically for pull requests and `false` on the main branch.
+
+```yaml
+gatekeeper-policies:
+  uses: broadinstitute/shared-workflows/.github/workflows/gatekeeper-policies.yaml@gatekeeper-policys
+  needs: hydrate
+  with:
+    environment: ${{ inputs.environment }}
+    pr_number: ${{ github.event.pull_request.number }}
+    validate-policies: true
+```
+
 ### local-checks.yaml
 
 These are local Actions that run for this repository. This workflow is not
 visible or usable outside of this repository.
+
+### local-tag-major-version.yaml
+
+This is a local workflow that runs for this repository. It is not visible or
+usable outside of this repository. On every push of a `vX.Y.Z` tag, it uses
+[somaz94/major-tag-action](https://github.com/somaz94/major-tag-action) to
+update the corresponding major version tag (e.g. `v2`) to point at the new tag.
+
+#### local-tag-major-version Secrets
+
+- `PAT_TOKEN`: The GitHub token used to push the updated major version tag.
 
 ### pre-commit.yaml
 
@@ -266,9 +322,13 @@ as well as Node 22.x are also available to this workflow.
 
 #### python-make-ci Inputs
 
-There are no additional inputs for this workflow. Additionally, the
-`jobs_run_on` input is not available for this workflow as the job is forced to
-use `ubuntu-latest` for the base image.
+- `additional_packages`: String of additional packages that should be installed.
+  Default: ``
+
+Additionally, the `jobs_run_on` input is not available for this workflow as the
+job is forced to use `ubuntu-latest` for the base image, and the default
+`timeout_minutes` for this workflow is `10` instead of the repository-wide
+default of `5`.
 
 ### python-test-deploy-to-pypi.yaml
 
@@ -321,6 +381,8 @@ generate the [Terraform][10] documentation and store it in the README.md.
 
 - `config_file`: The path to the configuration file. Default:
   `.terraform-docs.yaml`
+- `fail_on_diff`: If set to true, fail the Action if terraform-docs generates a
+  diff. Default: `false`
 - `git_push`: If set to true, push the changes to the repository. Default:
   `false`
 - `output_file`: The path to the output file. Default: `README.md`
@@ -361,6 +423,7 @@ Action).
 - `run_trivy`: If set to true, run Trivy tests. Default: `false`
 - `trivy_skip_files`: A comma-separated list of files Trivy should ignore.
   Default: ``
+- `trivy_version`: The version of Trivy to run. Default: `v0.69.2`
 
 #### terraform-static-analyze Secrets
 
@@ -397,7 +460,11 @@ minimal options for configuration.
 
 #### yamllint Inputs
 
+- `additional_packages`: String of additional packages that should be installed.
+  Default: ``
 - `extra_arguments`: Extra arguments to pass to `yamllint`, Default: ``
+- `python_version`: The version of [Python][5] to use for the run. Default:
+  `3.14`
 
 ## Releases
 

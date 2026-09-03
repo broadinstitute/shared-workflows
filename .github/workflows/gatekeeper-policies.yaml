@@ -1,0 +1,135 @@
+---
+name: Gatekeeper policy check
+
+"on":
+  workflow_call:
+    inputs:
+      gke_cluster_name:
+        description: The GKE cluster to fetch ConstraintTemplates from.
+        required: false
+        type: string
+        default: gke-autopilot-01-prod
+      gke_location:
+        description: The location (region/zone) of the GKE cluster.
+        required: false
+        type: string
+        default: us-east4
+      gke_project:
+        description: The GCP project the GKE cluster lives in.
+        required: false
+        type: string
+        default: bits-gke-clusters
+      manifests_directory:
+        description: The directory where Kubernetes manifests are located.
+        default: deployment/app
+        required: false
+        type: string
+      pr_number:
+        description: The pull request number to post a comment on.
+        required: true
+        type: number
+      jobs_run_on:
+        default: ubuntu-latest
+        description: The runner group on which jobs will run.
+        required: false
+        type: string
+      timeout_minutes:
+        description: The maximum time (in minutes) for a job to run.
+        default: 10
+        required: false
+        type: number
+      working_directory:
+        description: The working directory where all jobs should be executed.
+        default: .
+        required: false
+        type: string
+      environment:
+        default: ""
+        description: The environment name being used
+        required: true
+        type: string
+      validate-policies:
+        description: Whether to validate Gatekeeper policies.
+        default: true
+        required: false
+        type: boolean
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+  packages: read
+
+jobs:
+  gator-test:
+    name: Gatekeeper policy check
+    if: ${{ inputs.validate-policies }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    runs-on: ${{ inputs.jobs_run_on }}
+    timeout-minutes: ${{ inputs.timeout_minutes }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        uses: jdx/mise-action@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          install_args: gator@latest
+
+      - name: Use Gator
+        run: mise use -g gator@latest
+
+      # yamllint disable rule:line-length
+      - name: Get Gator JQ file.
+        run: |
+          # curl -sSL https://raw.githubusercontent.com/broadinstitute/gator/main/.github/scripts/gator-format-results.jq -o "${{ github.workspace }}/.github/scripts/gator-format-results.jq"
+          curl -sSL https://raw.githubusercontent.com/broadinstitute/shared-workflows/refs/heads/gatekeeper-policys/.github/scripts/gator-format-results.jq -o gator-format-results.jq
+
+      - name: Run gator test
+        id: gator
+        run: |
+          gator test --image ghcr.io/broadinstitute/kubernetes-configs/gatekeeper-policies:latest -f ${{ inputs.manifests_directory }} -o json > gator-results.json || true
+          echo "deny_count=$(jq '[.[] | (.result // .) | select((.enforcementAction // .enforcementaction) == "deny")] | length' gator-results.json)" >> "$GITHUB_OUTPUT"
+      # yamllint enable rule:line-length
+      - name: Build PR comment
+        run: |
+          {
+            echo "<!-- gator-test-report -->"
+            echo "### Gatekeeper policy check results"
+            echo
+            jq -r -f "${{ github.workspace }}/gator-format-results.jq" gator-results.json
+          } > comment.md
+
+      - name: Post PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          MARKER="<!-- gator-test-report -->"
+          PR_NUMBER="${{ inputs.pr_number }}"
+
+          # Delete any previous report comment(s) rather than editing in place,
+          # so the fresh comment always sorts as the most recent on the PR.
+          EXISTING_IDS=$(gh api "repos/${{ github.repository }}/issues/$PR_NUMBER/comments" --paginate \
+            -q ".[] | select(.body | startswith(\"$MARKER\")) | .id")
+
+          for id in $EXISTING_IDS; do
+            gh api "repos/${{ github.repository }}/issues/comments/$id" -X DELETE
+          done
+
+          gh api "repos/${{ github.repository }}/issues/$PR_NUMBER/comments" -X POST -F body=@comment.md
+
+      - name: Fail on blocking (deny) violations
+        run: |
+          if [ "${{ steps.gator.outputs.deny_count }}" -gt 0 ]; then
+            echo "::error::${{ steps.gator.outputs.deny_count }} Gatekeeper constraint(s) with enforcementAction=deny failed. See the PR comment for details."
+            exit 1
+          fi
