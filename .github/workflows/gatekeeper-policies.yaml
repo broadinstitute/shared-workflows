@@ -96,11 +96,8 @@ jobs:
       - name: Run gator test
         id: gator
         run: |
-          pwd
-          ls -al
-          gator test --image ghcr.io/broadinstitute/kubernetes-configs/gatekeeper-policies:latest -f ${{ inputs.manifests_directory }} -o json
-          # echo "deny_count=$(jq '[.[] | (.result // .) | select((.enforcementAction // .enforcementaction) == "deny")] | length' gator-results.json)" >> "$GITHUB_OUTPUT"
-          ls -al
+          gator test --image ghcr.io/broadinstitute/kubernetes-configs/gatekeeper-policies:latest -f ${{ inputs.manifests_directory }} -o json > gator-results.json || true
+          echo "deny_count=$(jq '[.[] | (.result // .) | select((.enforcementAction // .enforcementaction) == "deny")] | length' gator-results.json)" >> "$GITHUB_OUTPUT"
       # yamllint enable rule:line-length
       - name: Build PR comment
         run: |
