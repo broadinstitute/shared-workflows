@@ -46,7 +46,22 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v7
+      - name: Install dependencies
+        uses: jdx/mise-action@v4
+      # Check if mise actually activated a terraform version
+      - name: Check for Terraform via mise
+        id: check-terraform
+        run: |
+          # mise where returns a 0 exit code if the tool is configured, or an error if not
+          if mise where terraform >/dev/null 2>&1; then
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "Terraform found via mise config."
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "No mise/asdf/tfenv config found for Terraform."
+          fi
       - name: Setup Terraform
+        if: ${{ steps.check-terraform.outputs.found != 'true' }}
         uses: hashicorp/setup-terraform@v4
         with:
           terraform_version: ${{ inputs.terraform_version }}
