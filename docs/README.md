@@ -140,6 +140,8 @@ check if any violations with `enforcementAction: deny` are found.
 
 #### gatekeeper-policies Inputs
 
+- `branch`: The branch in this repository to use for downloading any needed
+  scripts. Default: `main`
 - `environment`: The environment name being used. Required
 - `gke_cluster_name`: The GKE cluster to fetch ConstraintTemplates from.
   Default: `gke-autopilot-01-prod`

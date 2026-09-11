@@ -23,14 +23,14 @@ def constraint_label:
   ((.kind // "?") + "/" + (.metadata.name // "?"));
 
 if length == 0 then
-  "✅ **No Gatekeeper policy violations found.**"
+  "<details><summary>✅ **No Gatekeeper policy violations found.**</summary>"
 else
   ([.[] | select(enforcement_action == "deny")] | length) as $deny
   | (
       if $deny > 0 then
-        "🚫 **\($deny) blocking violation(s)** found (enforcementAction: deny)."
+        "<details><summary>🚫 **\($deny) blocking violation(s)** found (enforcementAction: deny).</summary>"
       else
-        "⚠️ No blocking violations, but \(length) advisory result(s) were reported."
+        "<details><summary>⚠️ No blocking violations, but \(length) advisory result(s) were reported.</summary>"
       end
     ) as $summary
   | $summary
@@ -47,4 +47,5 @@ else
           + " |"
       ) | join("\n")
     )
+  + "</details>"
 end
